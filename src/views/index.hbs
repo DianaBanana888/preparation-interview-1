@@ -1,0 +1,19 @@
+<div class="row deck">
+  {{#each decks}}
+
+  <div class="col s12 m4  deck" id="deck-{{_id}}">
+    <div class="card-panel teal blue-grey lighten-4">
+      <p class="title">
+        {{#if titlerus}}
+        {{titlerus}}
+        {{else}} {{title}}
+        {{/if}}
+      </p>
+      <a class="waves-effect waves-light btn-small btn-flat btn-start startBtn">
+        <i class="material-icons left">subdirectory_arrow_right
+        </i>Начать</a>
+    </div>
+  </div>
+
+  {{/each}}
+</div>

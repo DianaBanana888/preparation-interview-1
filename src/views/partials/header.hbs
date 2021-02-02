@@ -1,0 +1,18 @@
+<nav class="blue-grey darken-2">
+  <div class="nav-wrapper">
+    <div class="col s12">
+      <a href="/" class="brand-logo"><strong>Preparation interview</strong></a>
+      <ul id="nav-user" class="right hide-on-med-and-down">
+        {{#if username}}
+        <li><a href="/createDeck" class="creat-deck">Создать карточку</a></li>
+        <li><a href="/user">{{username}}</a></li>
+        <li><a href="/auth/logout">Выход</a></li>
+        {{else}}
+        <li><a class="register-user">Регистрация</a></li>
+        <li><a class="input-user">Войти</a></li>
+
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>

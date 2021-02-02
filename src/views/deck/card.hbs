@@ -1,0 +1,30 @@
+<form class="card-form">
+  <div class="row">
+    <div class="col s12">
+      <div class="row">
+        <p class="title-card">{{card.question}}</p>
+        {{#if card.answerArr}}
+        <ul class="variants">
+          {{#each card.answerArr}}
+          <li>
+            {{this}}
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+        <br>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">textsms</i>
+          <label for="userAnswer"></label>
+          <input placeholder="Ваш ответ" type="text" name="userAnswer" id="userAnswer" class="autocomplete">
+        </div>
+        <button class="btn waves-effect waves-light blue-grey darken-2 answerBtn" type="submit" name="action">Отправить
+          ответ
+          <i class="material-icons right">send</i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<h3>{{username}}</h3>
+<p>Your statistics</p>
+<table class="results striped">
+  <tr>
+    <th>Date</th>
+    <th>Deck</th>
+    <th>Total answers</th>
+    <th>Right answers</th>
+  </tr>
+  {{#each rounds}}
+  <tr>
+    <td>{{this.date}}</td>
+    <td>{{this.deck.title}}</td>
+    <td>{{this.tries}}</td>
+    <td>{{this.points}}</td>
+  </tr>
+  {{/each}}
+</table>
