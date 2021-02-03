@@ -40,9 +40,9 @@ class Timer {
 // дальше логика отображения таймера на странице partials/timer.hbs
 //
 
-const timerDisplay = document.querySelector('.timer');
-const btn = document.querySelector('button');
-timerDisplay.innerText = '00:00';
+const timerDisplay = document.querySelector('div.timer');
+const btn = document.querySelector('button.timer');
+timerDisplay.innerText = '';
 
 btn.addEventListener('click', e => {
 
