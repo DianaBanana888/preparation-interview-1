@@ -1,8 +1,30 @@
+<div class="top-window">
+
+  <div class="top-window--title">
+    <img src="/images/newLogo-afd1d3b9873d51ff1097569274da8b3e.svg" alt="" srcset="">
+    Укрепим и проверим знания
+  </div>
+
+  <div class="top-window--name-block">
+
+    {{#if username}}
+    <div class="name-block--hello">Привет
+      <span class="name-block--name">{{username}},</span>
+
+      уверены у тебя все лучше получается,
+      но давай все же еще раз пробежимся по тестам!
+    </div>
+
+    {{/if}}
+  </div>
+</div>
+
+
 <div class="row deck">
   {{#each decks}}
 
   <div class="col s12 m4  deck" id="deck-{{_id}}">
-    <div class="card-panel teal blue-grey lighten-4">
+    <div class="card-panel">
       <p class="title">
         {{#if titlerus}}
         {{titlerus}}
