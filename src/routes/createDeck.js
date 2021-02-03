@@ -1,18 +1,12 @@
 const express = require('express');
+const { isAdmin } = require('../../middleware/auth');
 
-const Deck = require('../../models/Deck');
+// const Deck = require('../../models/Deck');
 
 const router = express.Router();
 
-
-
-router.get('/', async (req, res) => {
-  if (res.app.locals.username) {
-    res.render('createDeck.hbs', {});
-  } else {
-    res.render('user/noAuth.hbs', {})
-  }
-
+router.get('/', isAdmin, async (req, res) => {
+  res.render('createDeck.hbs', {});
 });
 
 module.exports = router;

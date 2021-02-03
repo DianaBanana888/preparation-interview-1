@@ -104,6 +104,7 @@ navUser.addEventListener('click', (e) => {
 //   await fetchUniversal('GET', '');
 // });
 
+// ADMIN
 const submitFormDeck = async (e) => {
   e.preventDefault();
   const questions = [];
