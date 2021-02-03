@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/order */
 const db = require('./db');
 const fs = require('fs').promises;
@@ -6,13 +7,15 @@ const Card = require('./Card');
 const path = require('path');
 
 db.on('open', () => { console.log('Start DB'); }).on('error', console.error.bind(console, 'connection error:'));
-
-const seed = async () => {
-  await db.dropDatabase();
-  const pathFile = path.join(__dirname, '../models/fileseed/db.json');
+// const fileName = 'html_level3.json';
+const seed = async (file) => {
+  const pathFile = path.join(__dirname, `../models/fileseed/${file}`);
   const json = JSON.parse(await fs.readFile(pathFile, 'utf8'));
-  return Object.entries(json).map(async ([key, value]) => {
-    const elDeck = await Deck.create({ key, title: value.title });
+  let elDeck;
+  Object.entries(json).map(async ([key, value]) => {
+    console.log('@@@@@', key);
+    elDeck = await Deck.findOne({ key });
+    if (!elDeck) elDeck = await Deck.create({ key, title: value.title });
     const cardArr = await value.arr.map(async (el) => {
       const elCard = await Card.create({
         level: el.level,
@@ -26,6 +29,5 @@ const seed = async () => {
     });
     return cardArr;
   });
-  // console.log('Database seed is finished');
 };
-seed();
+seed('html_level.json');

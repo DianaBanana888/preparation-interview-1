@@ -1,0 +1,333 @@
+{
+  "html": {
+    "title": "HTML",
+    "arr": [
+      {
+        "level": "1",
+        "question": "Контейнер для элементов, определяющих содержимое таблицы",
+        "answer": "<table>",
+        "answerArr": [
+          "<table>",
+          "<head>",
+          "<form>",
+          "<isindex>"
+        ]
+      },
+      {
+        "level": "1 ",
+        "question": "Определяет верхнюю часть страницы ",
+        "answer": "<header>",
+        "answerArr": [
+          "<section>",
+          "<nav>",
+          "<header>",
+          "<html>"
+        ]
+      },
+      {
+        "level": "1 ",
+        "question": "Отображает горизонтальную линию ",
+        "answer": "<hr> ",
+        "answerArr": [
+          "<hr>",
+          "<img>",
+          "<p>",
+          "<section>"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Служит для поискового индекса на странице",
+        "answer": "<isindex>",
+        "answerArr": [
+          "<isindex> ",
+          "<h1> ",
+          "<footer> ",
+          "<figcaption> "
+        ]
+      },
+      {
+        "level": "1 ",
+        "question": "Определяет показываемый на странице рисунок ",
+        "answer": "<img>",
+        "answerArr": [
+          "<style>",
+          "<p>",
+          "<img>",
+          "<td>"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Позволяет группировать заголовки страницы или раздела",
+        "answer": "<hgroup>",
+        "answerArr": [
+          "<hgroup>",
+          "<marquee>",
+          "<span>",
+          "<pre>"
+        ]
+      },
+      {
+        "level": "1 ",
+        "question": "Элемент служит для отображения списка пунктов меню ",
+        "answer": "<ul>",
+        "answerArr": [
+          "<thead>",
+          "<menu>",
+          "<p>",
+          "<ul>"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Тег … задает связи страницы с другими файлами. Размещается внутри контейнера <head>",
+        "answer": "<link>",
+        "answerArr": [
+          "<thead>",
+          "<tfoot>",
+          "<style>",
+          "<link>"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Определяет отдельный элемент в списке",
+        "answer": "<li>",
+        "answerArr": [
+          "<style> ",
+          "<th> ",
+          "<li>",
+          "<nav>"
+        ]
+      },
+      {
+        "level": "1 ",
+        "question": "Включает в себя все содержимое веб-cраницы ",
+        "answer": "<html> ",
+        "answerArr": [
+          "<html>",
+          "<style>",
+          "<tbody>",
+          "<td>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Этот элемент указывает «подвал» сайта. Зачастую используется с тегами <header> и <article>",
+        "answer": "<footer>",
+        "answerArr": [
+          "<header>",
+          "<article>",
+          "<footer>",
+          "<form>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Этот тег задается внутри блока <head> и указывает для браузера полный базовый адрес текущего документа. Он применяется для документов с относительной адресацией, позволяя корректно определить адреса ссылок, даже если эта страница была перемещена.",
+        "answer": "<body>",
+        "answerArr": [
+          "<head>",
+          "<target>",
+          "<body>",
+          "<base>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "С помощью тега … можно создавать ссылки и указывать места на странице, куда именно необходимо осуществить переход (якорь).",
+        "answer": "<a>",
+        "answerArr": [
+          "<div>",
+          "<a>",
+          "<br>",
+          "<colgroup>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Элемент описывает заголовок первого уровня",
+        "answer": "<h1>",
+        "answerArr": [
+          "<h1>",
+          "<isindex>",
+          "<li>",
+          "<h2>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Определяет тип страницы.Такой элемент необходимо задавать самым первым в начале файла,что бы браузер знал как правильно отображать данные(в соответствии с какими стандартами).",
+        "answer": "<DOCTYPE>",
+        "answerArr": [
+          "<aside>",
+          "<!– –>",
+          "<!DOCTYPE>",
+          "<article>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Содержит уточняющую информацию о странице",
+        "answer": "<footer>",
+        "answerArr": [
+          "<head>",
+          "<nav>",
+          "<pre>",
+          "<body>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Данный элемент производит выравнивание своего содержимого по горизонтали по центру.",
+        "answer": "<center>",
+        "answerArr": [
+          "<center>",
+          "<h1>",
+          "<div>",
+          "<header>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Элемент … служит для отображения информации об авторе.Он может включать в себя любые теги HTML.По умолчанию текст внутри этого элемента отображается курсивным начертанием.",
+        "answer": "<canvas>",
+        "answerArr": [
+          "<address>",
+          "<canvas>",
+          "</ address>",
+          "<dd>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Задает области картинки,которые могут стать ссылками.Описывается внутри тега <map> Картинки с такими ссылками называются «картой изображений».",
+        "answer": "<area>",
+        "answerArr": [
+          "<area>",
+          "<map>",
+          "<form>",
+          "<head>"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Используется для хранения содержимого страницы,которое отображается в окне браузера.Используется только раз и должен находиться в теге <html>",
+        "answer": "<meta>",
+        "answerArr": [
+          "<ol>",
+          "<meta>",
+          "<isindex>",
+          "<body>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите тег для создания нумерованного списка?",
+        "answer": "<ol>",
+        "answerArr": [
+          "<ul>",
+          "<dl>",
+          "<ol>",
+          "<list>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ создания выпадающего списка",
+        "answer": "<select>",
+        "answerArr": [
+          "<select>",
+          "<list>",
+          "<input type=”dropdown”>",
+          "<input type=”list”>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ установки фонового изображения страницы?",
+        "answer": "<body background=”background.gif\">",
+        "answerArr": [
+          "<body background=”background.gif”>",
+          "<img src=”background.gif” background>",
+          "<background img=”background.gif”>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "В HTML строчные элементы отображаются нормально без перехода на новую строку",
+        "answer": "<Истина>",
+        "answerArr": [
+          "Истина",
+          "Ложь"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ вставки изображения?",
+        "answer": "<fimg src=”image.gif” alt=”MyImage”>",
+        "answerArr": [
+          "<img alt=”MyImage”>\"image.gif",
+          "<img src=”image.gif” alt=”MyImage”>",
+          "<img href=”image.gif” alt=”MyImage”>",
+          "<image src=”image.gif” alt=”MyImage”>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите тег для создания ненумерованного списка?",
+        "answer": "<dl>",
+        "answerArr": [
+          "<dl>",
+          "<list>",
+          "<ol>",
+          "<ul>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ создания многострочного текстового поля",
+        "answer": "<input type=”textarea”>",
+        "answerArr": [
+          "<input type=”textbox”>",
+          "<textarea>",
+          "<input type=”textarea”>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ создания чекбокса",
+        "answer": "<input type=”checkbox”>",
+        "answerArr": [
+          "<checkbox>",
+          "<input type=”checkbox”>",
+          "<input type=”check”>",
+          "<check>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите теги для работы с таблицами?",
+        "answer": "<table><tr><td>",
+        "answerArr": [
+          "<table><tr><td>",
+          "<table><head><tfoot>",
+          "<table><tr><tt>",
+          "<thead><body><tr>"
+        ]
+      },
+      {
+        "level": "3",
+        "question": "Выберите верный способ создания текстового поля для ввода информации",
+        "answer": "<input type=”text”>",
+        "answerArr": [
+          "<input type=”textfield”>",
+          "<textinput type=”text”>",
+          "<textfield>",
+          "<input type=”text”>"
+        ]
+      }
+    ]
+  }
+}
