@@ -13,7 +13,6 @@ const seed = async (file) => {
   const json = JSON.parse(await fs.readFile(pathFile, 'utf8'));
   let elDeck;
   Object.entries(json).map(async ([key, value]) => {
-    console.log('@@@@@', key);
     elDeck = await Deck.findOne({ key });
     if (!elDeck) elDeck = await Deck.create({ key, title: value.title });
     const cardArr = await value.arr.map(async (el) => {
@@ -30,4 +29,4 @@ const seed = async (file) => {
     return cardArr;
   });
 };
-seed('html_level.json');
+seed('css_json.json');
