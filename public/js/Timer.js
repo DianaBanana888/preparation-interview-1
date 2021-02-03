@@ -27,7 +27,7 @@ class Timer {
       this.timeLeft -= 1;
 
       // вывод времени
-      display.innerText = `${timer.minutes}:${timer.seconds}`;
+      display.innerText = `${this.minutes}:${this.seconds}`;
     }, 1000);
   }
 
@@ -35,3 +35,18 @@ class Timer {
     this.on = false;
   }
 }
+
+//
+// дальше логика отображения таймера на странице partials/timer.hbs
+//
+
+const timerDisplay = document.querySelector('.timer');
+const btn = document.querySelector('button');
+timerDisplay.innerText = '00:00';
+
+btn.addEventListener('click', e => {
+
+  const timer = new Timer(10);
+  timer.start(timerDisplay);
+
+});
