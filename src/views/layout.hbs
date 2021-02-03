@@ -7,11 +7,13 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link rel="stylesheet" href="/css/timer.css" />
   <link rel="stylesheet" href="/css/styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"
     integrity="sha512-zT3zHcFYbQwjHdKjCu6OMmETx8fJA9S7E6W7kBeFxultf75OPTYUJigEKX58qgyQMi1m1EgenfjMXlRZG8BXaw=="
     crossorigin="anonymous"></script>
+  <script defer src="/js/Timer.js"></script>
+  <script defer src="/js/timerDisplay.js"></script>
   <script defer src="/js/application.js"></script>
   <title>Preparation-interview</title>
 </head>
@@ -21,6 +23,8 @@
   {{> header}}
   <div id="main" class="container">
     {{{body}}}
+
+    {{> timer}}
   </div>
 
   {{> modal}}
