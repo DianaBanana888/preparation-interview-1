@@ -1,0 +1,195 @@
+{
+    "css": {
+        "title": "CSS",
+        "arr": [{
+                "level": "1",
+                "question": "Какой CSS-код написан правильно?",
+                "answer": "div {border: 1px solid #hhh;",
+                "answerArr": ["<div> {border: 1px solid #ccc;}", "div {border: 1px solid #hhh;}", "div {border: 1px solid #ccc;}", "<div> {border: 1px solid #hhh;}"]
+            }, {
+                "level": "1",
+                "question": "Есть такой код: ul li:first-letter {font-size: 200%;}. Что он делает?",
+                "answer": "Ничего не делает, так как псевдоэлемента first-letter вообще не существует.",
+                "answerArr": ["Делает первую букву у первого элемента в нумерованном списке размером 200%.",
+                    "Ничего не делает, так как псевдоэлемента first-letter вообще не существует.",
+                    "Делает первую букву у каждого элемента ненумерованного списка размером 200%.",
+                    "Делает первую букву у первого элемента в ненумерованном списке размером 200%."]
+            }, {
+                "level": "1",
+                "question": "Какой вариант задания цвета НЕ сработает?",
+                "answer": "color: #000",
+                "answerArr": ["color: #aaa;", "color: #aaaaaa;", "color: #000;",
+                    "color: #hhh;"]
+            }, {
+                "level": "1",
+                "question": "Как правильно вставляются комментарии в CSS-код?",
+                "answer": "/*Мой комментарий*/",
+                "answerArr": ["#Мой комментарий #",
+                    "# Мой комментарий",
+                    "/*Мой комментарий*/",
+                    "// Мой комментарий"]
+            }, {
+                "level": "1",
+                "question": "Какое свойство используется для задания полей у блока?",
+                "answer": "margin",
+                "answerArr": ["direction", "padding", "position", "margin"]
+            }, {
+                "level": "1",
+                "question": "Чтобы при наведении курсора мыши на ссылку, она меняла цвет. Какой псевдоэлемент нужно использовать ?",
+                "answer": ": active",
+                "answerArr": ["active", "hover", "link"]
+            }, {
+                "level": "1",
+                "question": "Какое свойство используется для задания отступов у блока?",
+                "answer": "padding",
+                "answerArr": ["padding", "direction", "position", "margin"]
+            }, {
+                "level": "1",
+                "question": "Алексей написал такой HTML-код: <div id=”myid”>Содержимое</div>. Как задать стиль для тега <div>?",
+                "answer": "div.myid {margin: 1px;+}",
+                "answerArr": ["div[myid] {margin: 1px;}", "div#myid {margin: 1px;}", "div.myid {margin: 1px;}", ".myid {margin: 1px;}"]
+            }, {
+                "level": "1",
+                "question": "В каком из представленных ниже вариантов содержится явная ошибка:",
+                "answer": "p span#text (font-size: 150%;}",
+                "answerArr": ["p span#text (font-size: 150%;}",
+                    "p text (font-size: 150%;}",
+                    "p {font-size: 150%;}",
+                    "p span {font-size: 150%;}"]
+            }, {
+                "level": "1",
+                "question": "Есть такой HTML-код: <p><span>Синий</span> не синий</p>. Какой CSS-код внутри тега <span> сделает синий цвет:",
+                "answer": "span {color: blue;}",
+                "answerArr": ["p < span {color: blue;}", "span {color: blue;}", ".blue (color: blue;}"]
+            }, {
+                "level": "2",
+                "question": "ul li em {color: red;}\nHTML:\n<ul><li><strong><em> blah </em></strong></li></ul>",
+                "answer": "Красный",
+                "answerArr": ["Чёрный", "Цвет по умолчанию", "Фиолетовый", "Красный"]
+            }, {
+                "level": "2",
+                "question": "Какое CSS свойство используется для определения стиля при наведении на ссылку курсора мыши, но при этом элемент еще не активирован?",
+                "answer": "a:hover",
+                "answerArr": ["a:hover", "a:visited", "a:vlink", "a:link"]
+            }, {
+                "level": "2",
+                "question": "Какой будет цвет у слова “blah”?\n CSS:\n ul>li>em {color: red;}\n HTML:\n <ul><li><em> blah </em></li></ul>",
+                "answer": "Цвет по умолчанию",
+                "answerArr": ["Чёрный", "Красный", "Цвет по умолчанию", "Фиолетовый"]
+            }, {
+                "level": "2",
+                "question": "Какой будет цвет у слова ‘blah’?\n CSS:\n ul li em {color: red;}\n HTML:\n<ul>\n<li>blah</li>\n</ul>",
+                "answer": "Цвет по умолчанию",
+                "answerArr": ["Фиолетовый", "Цвет по умолчанию", "Красный", "Чёрный"]
+            }, {
+                "level": "2",
+                "question": "Какое CSS свойство используется для изменения стиля самой ссылки?",
+                "answer": "a:link",
+                "answerArr": ["a:hover", "a:visited", "a:link", "a:vlink"]
+            }, {
+                "level": "2",
+                "question": "Как будут оформлены link 1, link 2, link 3?\n CSS:\n li {\ndisplay: inline;\nmargin: 0px 25px 0px 25px;\npadding: 10px 50px 10px 50px;\n border: thin solid #000000;\n}\n HTML:\n<ul>\n<li>link 1</li>\n<li>link 2</li>\n<li>link 3</li>\n</ul>",
+                "answer": "На одной строке, помещённые в тонкие чёрные рамки, шириной 100 px, высотой 20 px",
+                "answerArr": ["На трёх строках, помещённые в тонкие чёрные рамки, шириной 100 px, высотой 50 px",
+                    "На одной строке, помещённые в тонкие чёрные рамки, шириной 50 px, высотой 10 px",
+                    "На одной строке, помещённые в тонкие чёрные рамки, шириной 100 px, высотой 20 px",
+                    "На трёх строках, помещённые в тонкие чёрные рамки, шириной 50 px, высотой 25 px"]
+            }, {
+                "level": "2",
+                "question": "Какой будет цвет у слова “blah”?\n CSS:\n  ul>li>em {color: red;}\n HTML:\n <ul><li><strong><em> blah </em></strong></li></ul>",
+                "answer": "Цвет по умолчанию",
+                "answerArr": ["Фиолетовый", "Красный", "Чёрный", "Цвет по умолчанию"]
+            }, {
+                "level": "2",
+                "question": "Какое CSS свойство используется для изменения стиля уже кликнутой ссылки?",
+                "answer": "a:visited",
+                "answerArr": ["a:link", "a:visited", "a:vlink", "a:hover"]
+            }, {
+                "level": "2",
+                "question": "Как правильно подключать таблицу стилей?",
+                "answer": "<link rel=”stylesheet” type=”text/css” href=”mystyle.css”>",
+                "answerArr": ["<style src=”mystyle.css”>", "<stylesheet>mystyle.css</stylesheet>", "<link rel=”stylesheet” type=”text/css” href=”mystyle.css”>"]
+            }, {
+                "level": "2",
+                "question": "Укажите верно написанный стиль:",
+                "answer": "body {color: black;}",
+                "answerArr": ["{body;color:black;}", "body {color: black;}", "body:color=black;", "{body:color=black;}" ]
+            }, {
+                "level": "3",
+                "question": "Указывает оформление элемента, получившего фокус",
+                "answer": ": focus",
+                "answerArr": ["@font-face", ": active", ": hover", ": focus"]
+            }, {
+                "level": "3",
+                "question": "Задает размещение верхнего края элемента",
+                "answer": "top",
+                "answerArr": ["z-index", "unicode-bidi", "width", "top"]
+            }, {
+                "level": "3",
+                "question": "Позволяет задать несколько свойств внешней границы элемента",
+                "answer": "padding",
+                "answerArr": ["padding", "page-break-after", "outline", "quotes"]
+            }, {
+                "level": "3",
+                "question": "Задает с какой стороны запрещено обтекание",
+                "answer": "counter-reset",
+                "answerArr": ["clear", "color", "counter-reset", "counter-increment"]
+            }, {
+                "level": "3",
+                "question": "Вывод текста перед элементом",
+                "answer": ": before",
+                "answerArr": [": hover", ": link", ": before", ": first-letter"]
+            }, {
+                "level": "3",
+                "question": "Определяет характер отображения не поместившегося содержимого",
+                "answer": "padding",
+                "answerArr": ["page-break-before", "overflow", "padding", "text-decoration"]
+            }, {
+                "level": "3",
+                "question": "Задает оформление элемента при наведении курсора",
+                "answer": ": first-line",
+                "answerArr": [": first-line", ": hover", ": visited", "background"]
+            }, {
+                "level": "3",
+                "question": "Определяет настройки для язык документа или его фрагмента",
+                "answer": "!important",
+                "answerArr": [": lang", ": before", ": first-line", "!important"]
+            }, {
+                "level": "3",
+                "question": "Определяет преобразование текста в прописные или заглавные символы",
+                "answer": "text-transform",
+                "answerArr": ["text-transform", "width", "vertical-align", "z-index"]
+            }, {
+                "level": "3",
+                "question": "Указывает стиль активной ссылки",
+                "answer": ": active",
+                "answerArr": [": active", ": link", ": focus", "background-repeat"]
+            }, {
+                "level": "3",
+                "question": "Устанавливает положение элементов по оси Z(друг над другом)",
+                "answer": "z-index",
+                "answerArr": ["z-index", "white-space", ": first-child", "color"]
+            }, {
+                "level": "3",
+                "question": "Увеличивает приоритет стиля",
+                "answer": "!important",
+                "answerArr": ["after", ": first-child", ": active", "!important"]
+            }, {
+                "level": "3",
+                "question": "Задает тип носителя, для которого будет применяться стиль",
+                "answer": "clip",
+                "answerArr": ["@ page", "content", "clip", "@ media"]
+            }, {
+                "level": "3",
+                "question": "Осуществляет вставку содержимого в текст страницы",
+                "answer": "content",
+                "answerArr": ["direction", "empty-cells", "content", "font"]
+            }, {
+                "level": "3",
+                "question": "Устанавливает область содержимого элемента",
+                "answer": "height",
+                "answerArr": ["font-family", "font-weight", "clip", "height"]
+            }
+        ]
+    }
+}

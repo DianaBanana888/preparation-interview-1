@@ -240,12 +240,15 @@ decksContainer.addEventListener('click', async (event) => {
     try {
       const response = await fetch(`/deck/${deckID}`);
       const resData = await response.json();
-      session.roundID = resData.roundID;
-      session.cards = [...resData.cards];
+      console.log('***', resData.id);
+      const resData2 = await fetchPOST('/deck', {
+        id: resData.id, level: 3,
+      });
+      session.roundID = resData2.roundID;
+      session.cards = [...resData2.cards];
     } catch (err) {
       console.log(err);
     }
-
     await downloadHbs('cardHbs', 'card');
     decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
   }
