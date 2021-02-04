@@ -8,19 +8,25 @@
           {{#each card.answerArr}}
           <li>
             {{this}}
+            <div class="check-group">
+              <label for="{{this}}">
+                <input id="{{this}}" value="{{this}}" name="answer" type="radio" class="filled-in" />
+                <span></span>
+              </label>
+            </div>
+
           </li>
           {{/each}}
         </ul>
         {{/if}}
         <br>
 
-        <div class="input-field col s12">
+        {{!-- <div class="input-field col s12">
           <i class="material-icons prefix">textsms</i>
           <label for="userAnswer"></label>
           <input placeholder="Ваш ответ" type="text" name="userAnswer" id="userAnswer" class="autocomplete">
-        </div>
-        <button class="btn waves-effect waves-light blue-grey darken-2 answerBtn" type="submit" name="action">Отправить
-          ответ
+        </div> --}}
+        <button class="btn waves-effect answerBtn" type="submit" name="action">Отправить ответ
           <i class="material-icons right">send</i>
         </button>
 

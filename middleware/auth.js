@@ -17,7 +17,7 @@ const isValidPassword = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!(await bcrypt.compare(password, user.password))) {
-    res.json({ message: 'Wrong password, try again' });
+    res.json({ message: 'Неправильный пароль, попробуйте еще раз' });
   } else next();
 };
 
@@ -30,15 +30,16 @@ const isAuth = async (req, res, next) => {
 const isAlreadyRegistered = async (req, res, next) => {
   const { email } = req.body;
   if (await User.findOne({ email })) {
-    // res.render('user/login.hbs');
-    // res.redirect('/login');
-    res.json({ message: 'User with this email is already exist' });
-  } next();
+    res.json({ message: 'Пользователь с таким паролем уже существует' });
+  } else { next(); }
 };
 
 const isAdmin = async (req, res, next) => {
-  // продумать как распознать админа
-  if (req.session?.user?.id === req.session?.user?.admin) { next(); }
+  if (req.session.user.id === (await User.findOne({ email: 'superuser@gmail.com' })).id) {
+    next();
+  } else {
+    res.json({ message: 'У вас недостаточно прав, извините' });
+  }
 };
 
 module.exports = {

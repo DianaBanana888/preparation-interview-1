@@ -15,7 +15,7 @@ const { isAlreadyRegistered, isValidPassword } = require('../../middleware/auth'
 // });
 // имя пользователя с сервера - name
 router.post('/register', isAlreadyRegistered, async (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, email, password } = req.body;
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const user = await new User({
@@ -23,10 +23,9 @@ router.post('/register', isAlreadyRegistered, async (req, res) => {
     password: hashedPassword,
     email,
   }).save();
-  console.log(user);
   req.session.user = { id: user.id, name: user.name };
-
-  res.redirect('/');
+  res.json({ message: 'OK' });
+  // res.redirect('/');
 });
 
 // router.get('/login', async (req, res) => {
@@ -36,9 +35,10 @@ router.post('/register', isAlreadyRegistered, async (req, res) => {
 //  должна появиться какая-тофраза в случае успешной авторизации или неправильного логин, redirect /
 router.post('/login', isValidPassword, async (req, res) => {
   const { email } = req.body;
+  console.log('Route', req.body);
   const user = await User.findOne({ email });
   req.session.user = { id: user.id, name: user.name };
-  res.redirect('/');
+  res.json({ message: 'OK' });
 });
 
 router.get('/logout', (req, res, next) => {
