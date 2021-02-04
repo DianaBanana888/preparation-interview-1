@@ -1,3 +1,11 @@
+/* eslint-disable func-names */
+/* eslint-disable max-len */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-use-before-define */
+/* eslint-disable quotes */
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 const navUser = document.getElementById('nav-user');
@@ -116,7 +124,6 @@ function openModalForm(type = null, title = null, name = null) {
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
     const data = await fetchUniversal('POST', event.target.action, {
       name: event?.target?.login?.value,
       email: event.target.email.value,
@@ -177,7 +184,6 @@ const submitFormDeck = (e) => {
     const dataObj = {};
     if (i % 2 === 0) {
       dataObj.q = dataArr[i - 1];
-
       dataObj.a = dataArr[i];
       questions.push(dataObj);
     }
@@ -305,33 +311,10 @@ async function levelButton(fileName, deckID) {
   try {
     const hbsRes = await fetch(`/${fileName}.hbs`);
     const text = await hbsRes.text();
-    // eslint-disable-next-line no-return-assign
     return decksContainer.innerHTML = render(text, { deckID: deckID.id });
   } catch (err) {
     console.log(err);
   }
-}
-
-function choicePost() {
-  levelChoice = document.querySelector('.level-choices');
-  levelChoice.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('levelButton')) {
-      const data = {
-        level: e.target.name,
-        id: levelChoice.dataset.deckid,
-      };
-
-      await fetchPOST('/deck', data)
-        .then(async (resData) => {
-          session.roundID = resData.roundID;
-          session.cards = [...resData.cards];
-
-          await downloadHbs('cardHbs', 'card');
-          decksContainer.innerHTML = render(session.cardHbs,
-            { card: session.cards[session.pointer] });
-        });
-    }
-  });
 }
 
 decksContainer.addEventListener('click', async (event) => {
@@ -351,6 +334,38 @@ decksContainer.addEventListener('click', async (event) => {
   }
 });
 
+let timerOn = true;
+
+function choicePost() {
+  levelChoice = document.querySelector('.level-choices');
+  levelChoice.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('level-button')) {
+      const data = {
+        level: e.target.name,
+        id: levelChoice.dataset.deckid,
+      };
+
+      await fetchPOST('/deck', data)
+        .then(async (resData) => {
+          session.roundID = resData.roundID;
+          session.cards = [...resData.cards];
+
+          await downloadHbs('cardHbs', 'card');
+          decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
+        });
+
+      // создание и запуск таймера
+      const timerDisplay = document.querySelector('div.timer');
+      const timer = new Timer(3);
+      timer.start(timerDisplay);
+      // если время вышло
+      if (!timer.on) {
+        timerOn = false;
+      }
+    }
+  });
+}
+
 decksContainer.addEventListener('submit', async function (event) {
   event.preventDefault();
 
@@ -366,7 +381,6 @@ decksContainer.addEventListener('submit', async function (event) {
   });
 
   if (event.target.classList.contains('card-form')) {
-    // eslint-disable-next-line no-unused-vars
     const resData = await fetchPOST('/deck/check', {
       questID: session.cards[session.pointer],
       userAnswer: answer, // []

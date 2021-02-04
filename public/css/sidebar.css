@@ -1,0 +1,10 @@
+.sidebar {
+  position: absolute;
+  right: 10%;
+  top: 20%;
+  color: #fff;
+}
+
+.timer-wrapper {
+  max-width: 10%;
+}
