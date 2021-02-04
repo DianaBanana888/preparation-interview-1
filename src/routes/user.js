@@ -26,7 +26,7 @@ router.get('/', isAuth, async (req, res) => {
       date: formatDate(el.date),
       tries: el.tries,
       points: el.points,
-      level: arr[el.level],
+      level: arr[el.level - 1],
     };
   });
   res.render('user/profile.hbs', { rounds: roundArr });

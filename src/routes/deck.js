@@ -26,7 +26,7 @@ router.post('/finish', async (req, res) => {
   const arr = ['Легкий уровень', 'Средний уровень', 'Высокий уровень'];
   const round = await Round.findOne({ _id: req.body.roundID }).populate('deck').lean();// .select('tries points -_id')
   res.json({
-    tries: round.tries, points: round.points, deck: round.deck.title, level: arr[round.level],
+    tries: round.tries, points: round.points, deck: round.deck.title, level: arr[round.level - 1],
   });
 });
 
