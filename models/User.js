@@ -5,18 +5,18 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
     minlength: 4,
-    match: /^[A-Z]\w+$/i,
+    match: /^[а-яёА-Яa-zA-Z0-9_]{4,20}$/i,
   },
   email: {
     type: String,
     required: true,
-    minlength: 3,
-    match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
     unique: true,
   },
   password: {
     type: String,
     required: true,
+    minlength: 6,
+    match: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,15}$/i,
   },
 });
 

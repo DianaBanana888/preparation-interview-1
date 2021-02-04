@@ -105,6 +105,17 @@ div#modal-form {
 .form-auth input {
   color: #fff;
 }
+
+span.material-icons.eye {
+  color: #fff;
+  position: absolute;
+  right: 10px;
+}
+
+.input-field.col.s12 {
+  position: relative;
+}
+
 button.waves-effect.waves-teal.btn-flat.form-button {
   border: 1px solid;
 }
