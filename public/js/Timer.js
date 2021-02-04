@@ -9,7 +9,7 @@ class Timer {
     this.minutes = startMinutes;
     this.seconds = '00';
 
-    this.on = false;
+    this.on = true;
   }
 
   start(display) {

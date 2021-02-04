@@ -296,7 +296,7 @@ function choicePost() {
 
   levelChoice = document.querySelector('.level-choices');
   levelChoice.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('levelButton')) {
+    if (e.target.classList.contains('level-button')) {
 
       const data = {
         level: e.target.name,
@@ -310,7 +310,15 @@ function choicePost() {
 
           await downloadHbs('cardHbs', 'card');
           decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
+
+
         })
+
+      // создание и запуск таймера
+      const timerDisplay = document.querySelector('div.timer');
+      const timer = new Timer(3); // .on = true;
+      console.log(timer);
+      timer.start(timerDisplay); // .on = true;
     }
   })
 }
