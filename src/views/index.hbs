@@ -1,21 +1,30 @@
-<div class="top-window">
+<div class="top-window container">
 
   <div class="top-window--title">
     <img src="/images/newLogo-afd1d3b9873d51ff1097569274da8b3e.svg" alt="" srcset="">
-    Укрепим и проверим знания
+
+    <div class="top-window--slogan">Укрепим и проверим знания</div>
   </div>
 
   <div class="top-window--name-block">
 
-    {{#if username}}
-    <div class="name-block--hello">Привет
+
+    <div class="name-block--hello">
+      {{#if username}}
+      Рады что ты вернулся
       <span class="name-block--name">{{username}},</span>
 
       уверены у тебя все лучше получается,
       но давай все же еще раз пробежимся по тестам!
+
+      {{else}}
+      Привет дорогой друг, тебе необходимо Войти или Зарегистрироваться,
+      что бы начаить или пролжить проходить тесты.
+
+
+      {{/if}}
     </div>
 
-    {{/if}}
   </div>
 </div>
 
@@ -32,8 +41,9 @@
         {{/if}}
       </p>
       <a class="waves-effect waves-light btn-small btn-flat btn-start startBtn">
-        <i class="material-icons left">subdirectory_arrow_right
-        </i>Начать</a>
+        Начать
+        <span class="material-icons">trending_flat</span>
+      </a>
     </div>
   </div>
 

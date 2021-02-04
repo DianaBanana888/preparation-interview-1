@@ -4,10 +4,17 @@
       <a href="/" class="brand-logo"><b>F</b>lash<b>C</b>ards</a>
       <ul id="nav-user" class="right hide-on-med-and-down">
         {{#if username}}
+        <li><a href="/">На главную</a></li>
         <li><a href="/createDeck" class="creat-deck">Создать карточку</a></li>
-        <li><a href="/user">{{username}}</a></li>
-        <li><a href="/auth/logout">Выход</a></li>
+        <li><a href="/user">{{username}}
+            <span class="material-icons">person</span>
+          </a></li>
+        <li><a href="/auth/logout">
+            Выход
+            <span class="material-icons">logout</span>
+          </a></li>
         {{else}}
+        <li><a href="/">На главную</a></li>
         <li><a class="register-user">Регистрация</a></li>
         <li><a class="input-user">Войти</a></li>
 
