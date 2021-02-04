@@ -7,10 +7,17 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-use-before-define */
+/* eslint-disable quotes */
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
 const navUser = document.getElementById('nav-user');
 const modal = document.getElementById('modal-form');
 const modalContent = document.querySelector('.modal-content');
-const creatDeck = document.querySelector('.creat-deck');
+// const creatDeck = document.querySelector('.creat-deck');
 const addInputDeck = document.querySelector('.add-input-deck') || null;
 let formDeckCreate = document.getElementById('form-deck-create');
 const creteDeckSubmit = document.querySelector('.submit-deck');
@@ -19,47 +26,116 @@ const authForm = document.querySelector('.modal-content');
 const topWindow = document.querySelector('.top-window') || null;
 
 if (topWindow) {
+  // eslint-disable-next-line no-unused-vars
   document.addEventListener('scroll', (e) => {
     topWindow.style.opacity = 1 - (window.scrollY / 120);
   });
 }
 
-function openModalForm(type = null, title = null, name = null, message = null) {
+async function fetchUniversal(method, path, data) {
+  // console.log(path);
+  // console.log(data);
+  let response = {};
+  try {
+    response = await fetch(path, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log('123');
+    const result = await response.json();
+
+    console.log(result);
+    if (response.status === 500) alert(`Ошибка сервера , ${result.message}`);
+    return result;
+  } catch (err) { console.log(`This is your mistake: ${err.message}`); }
+}
+
+function openModalForm(type = null, title = null, name = null) {
   modalContent.innerHTML = '';
   modal.style.display = 'flex';
   setTimeout(() => {
     modal.classList.add('open');
   }, 100);
+  // 4 Feb Diana commented to add the improved form of registration
+  // const form = `
+  //   <h3 class="title-form">${title}</h3>
+  //   <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
+  //     <div class="input-field col s12">
+  //       <i class="material-icons prefix">person_outline</i>
+  //       <input name="login" type="text"  class="autocomplete">
+  //     </div>
+  //     <div class="input-field col s12">
+  //       <i class="material-icons prefix">https</i>
+  //       <input name="password" type="password" class="autocomplete pass-auth">
+  //       <a class="password-control">Показать пароль</a>
+  //     </div>
 
-  const form = `
+  //     <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
+
+  //   </form>
+  // `;
+
+  // Auth modal window
+  // modalContent.insertAdjacentHTML('beforeend', form);
+  // const formFromRegister = document.forms.register;
+
+  const formRegister = `
     <h3 class="title-form">${title}</h3>
     <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
       <div class="input-field col s12">
         <i class="material-icons prefix">person_outline</i>
-        <input name="login" type="text"  class="autocomplete">
+        <input placeholder="login, minimum 4 symbols" name="login" type="text"  class="autocomplete">
       </div>
       <div class="input-field col s12">
+      <i class="material-icons prefix">person_outline</i>
+      <input placeholder="email, minimum 3 symbols" name="email" id="email" type="email" class="validate">
+      <label for="email"></label>
+    </div>
+      <div class="input-field col s12">
         <i class="material-icons prefix">https</i>
-        <input name="password" type="password" class="autocomplete pass-auth">
+        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth">
         <a class="password-control">Показать пароль</a>
       </div>
 
       <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
-        
+
     </form>
   `;
 
-  // Auth modal window
-  modalContent.insertAdjacentHTML('beforeend', form);
-  formFromRegister = document.forms.register;
+  const formLogin = `
+    <h3 class="title-form">${title}</h3>
+    <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">person_outline</i>
+        <input placeholder="email" name="email" id="email" type="email" class="validate">
+        <label for="email"></label>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">https</i>
+        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth">
+        <a class="password-control">Показать пароль</a>
+      </div>
+
+      <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
+
+    </form>
+  `;
+
+  if (name === 'register') modalContent.insertAdjacentHTML('beforeend', formRegister);
+  if (name === 'login') modalContent.insertAdjacentHTML('beforeend', formLogin);
 
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
     const data = await fetchUniversal('POST', event.target.action, {
-      login: event.target.login.value,
+      name: event?.target?.login?.value,
+      email: event.target.email.value,
+      password: event.target.password.value,
     });
-    console.log(data);
+
     if (data.message !== 'OK') {
       event.target.insertAdjacentHTML(
         'beforeend',
@@ -130,22 +206,22 @@ const submitFormDeck = (e) => {
   window.location.href = '/';
 };
 
-async function fetchUniversal(method, path, data) {
-  console.log(path);
-  let response = {};
-  try {
-    response = await fetch(path, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const result = await response.json();
-    if (response.status === 500) alert(`Ошибка сервера , ${resData.message}`);
-    return result;
-  } catch (err) { console.log(`This is your mistake ${err.message}`); }
-}
+// async function fetchUniversal(method, path, data) {
+//   console.log(path);
+//   let response = {};
+//   try {
+//     response = await fetch(path, {
+//       method,
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     });
+//     const result = await response.json();
+//     if (response.status === 500) alert(`Ошибка сервера , ${resData.message}`);
+//     return result;
+//   } catch (err) { console.log(`This is your mistake ${err.message}`); }
+// }
 
 if (addInputDeck) {
   addInputDeck.addEventListener('click', () => {
@@ -227,11 +303,13 @@ const downloadHbs = async (key, fileName) => {
   }
 };
 const render = (hbs, data) => {
+  // eslint-disable-next-line no-undef
   const template = Handlebars.compile(hbs);
 
   return template(data);
 };
 
+// eslint-disable-next-line consistent-return
 const fetchPOST = async (url, body) => {
   try {
     const response = await fetch(url, {
@@ -279,10 +357,12 @@ decksContainer.addEventListener('click', async (event) => {
   }
 });
 
+let timerOn = true;
+
 function choicePost() {
   levelChoice = document.querySelector('.level-choices');
   levelChoice.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('levelButton')) {
+    if (e.target.classList.contains('level-button')) {
       const data = {
         level: e.target.name,
         id: levelChoice.dataset.deckid,
@@ -296,6 +376,15 @@ function choicePost() {
           await downloadHbs('cardHbs', 'card');
           decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
         });
+
+      // создание и запуск таймера
+      const timerDisplay = document.querySelector('div.timer');
+      const timer = new Timer(3);
+      timer.start(timerDisplay);
+      // если время вышло
+      if (!timer.on) {
+        timerOn = false;
+      }
     }
   });
 }
