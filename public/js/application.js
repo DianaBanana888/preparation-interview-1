@@ -291,6 +291,7 @@ decksContainer.addEventListener('click', async (event) => {
   }
 })
 
+let timerOn = true;
 
 function choicePost() {
 
@@ -316,9 +317,12 @@ function choicePost() {
 
       // создание и запуск таймера
       const timerDisplay = document.querySelector('div.timer');
-      const timer = new Timer(3); // .on = true;
-      console.log(timer);
-      timer.start(timerDisplay); // .on = true;
+      const timer = new Timer(3);
+      timer.start(timerDisplay);
+      // если время вышло 
+      if (!timer.on) {
+        timerOn = false;
+      }
     }
   })
 }
