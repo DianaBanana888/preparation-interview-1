@@ -11,19 +11,10 @@ class Timer {
 
     this.minutes = startMinutes;
     this.seconds = '00';
-
-    this.on = true;
   }
 
-  start(display) {
-    this.on = true;
-
+  start(display, form) {
     const countDown = setInterval(() => {
-      if (this.timeLeft <= 0) {
-        clearInterval(countDown);
-        this.stop();
-      }
-
       this.minutes = Math.floor(this.timeLeft / 60);
       this.seconds = this.timeLeft % 60;
       this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
@@ -31,10 +22,14 @@ class Timer {
 
       // вывод времени
       display.innerText = `${this.minutes}:${this.seconds}`;
-    }, 1000);
-  }
 
-  stop() {
-    this.on = false;
+      console.log(this);
+
+      if (this.timeLeft < 0) {
+        display.innerText = '0:00';
+        // form.requestSubmit();
+        clearInterval(countDown);
+      }
+    }, 1000);
   }
 }
