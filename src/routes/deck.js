@@ -23,15 +23,19 @@ router.post('/check', async (req, res) => {
 });
 
 router.post('/finish', async (req, res) => {
-  const round = await Round.findOne({ _id: req.body.roundID }).select('tries points -_id').lean();
-  res.json({ tries: round.tries, points: round.points });
+  const arr = ['Легкий уровень', 'Средний уровень', 'Высокий уровень'];
+  const round = await Round.findOne({ _id: req.body.roundID }).populate('deck').lean();// .select('tries points -_id')
+  res.json({
+    tries: round.tries, points: round.points, deck: round.deck.title, level: arr[round.level],
+  });
 });
 
 router.post('/', async (req, res) => {
-  const cards = await Card.find({ deckid: req.body.id, level: req.body.level }).select('level question answerArr').lean();
+  const card = await Card.find({ deckid: req.body.id, level: req.body.level }).select('level question answerArr').lean();
+  const cards = card.sort(() => Math.random() - 0.5);
   const deck = await Deck.findOne({ _id: req.body.id });
   let user = {};
-  if (req.app.locals.username) user = await User.findOne({ name: req.app.locals.username });
+  if (req.session.user.id) user = await User.findOne({ _id: req.session.user.id });
   const newRound = new Round({
     user: user._id,
     deck: deck._id,
