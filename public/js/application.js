@@ -1,3 +1,12 @@
+/* eslint-disable func-names */
+/* eslint-disable max-len */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
+/* eslint-disable consistent-return */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-use-before-define */
+/* eslint-disable quotes */
+/* eslint-disable no-unused-vars */
 const navUser = document.getElementById('nav-user');
 const modal = document.getElementById('modal-form');
 const modalContent = document.querySelector('.modal-content');
@@ -6,20 +15,14 @@ const addInputDeck = document.querySelector('.add-input-deck') || null;
 let formDeckCreate = document.getElementById('form-deck-create');
 const creteDeckSubmit = document.querySelector('.submit-deck');
 let levelChoice = document.querySelector('.level-choices') || null;
-let authForm = document.querySelector('.modal-content');
-const topWindow = document.querySelector('.top-window') || null
-
+const authForm = document.querySelector('.modal-content');
+const topWindow = document.querySelector('.top-window') || null;
 
 if (topWindow) {
   document.addEventListener('scroll', (e) => {
-
-    topWindow.style.opacity = 1 - (window.scrollY / 120)
-
-  })
+    topWindow.style.opacity = 1 - (window.scrollY / 120);
+  });
 }
-
-
-
 
 function openModalForm(type = null, title = null, name = null, message = null) {
   modalContent.innerHTML = '';
@@ -52,7 +55,7 @@ function openModalForm(type = null, title = null, name = null, message = null) {
 
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    event.stopPropagation()
+    event.stopPropagation();
     const data = await fetchUniversal('POST', event.target.action, {
       login: event.target.login.value,
     });
@@ -60,24 +63,22 @@ function openModalForm(type = null, title = null, name = null, message = null) {
     if (data.message !== 'OK') {
       event.target.insertAdjacentHTML(
         'beforeend',
-        `<p style="color:red">${data.message}</p>`
+        `<p style="color:red">${data.message}</p>`,
       );
-
     } else {
       modal.style.display = 'none';
-      location.href = '/'
+      location.href = '/';
     }
   });
 
   document.querySelector('.password-control').addEventListener('click', () => {
     const pass = document.querySelector('.pass-auth');
     if (pass.getAttribute('type') === 'password') {
-      pass.setAttribute('type', 'text')
+      pass.setAttribute('type', 'text');
     } else {
-      pass.setAttribute('type', 'password')
+      pass.setAttribute('type', 'password');
     }
-
-  })
+  });
 
   modal.addEventListener('click', (e) => {
     const target = e.target.classList.contains('modal-form');
@@ -85,7 +86,6 @@ function openModalForm(type = null, title = null, name = null, message = null) {
       modal.style.display = 'none';
       modal.classList.remove('open');
     }
-
   });
 }
 
@@ -105,52 +105,47 @@ navUser.addEventListener('click', (e) => {
 
 const submitFormDeck = (e) => {
   e.preventDefault();
-  let questions = []
+  const questions = [];
 
+  const colection = new Map();
+  const dataArr = Array.from(document.querySelectorAll(`.data`), (e) => e.value);
 
-  const colection = new Map()
-  let dataArr = Array.from(document.querySelectorAll(`.data`), e => e.value)
-
-  for (let i = 1; i < dataArr.length; i++) {
-    let dataObj = {}
+  for (let i = 1; i < dataArr.length; i += 1) {
+    const dataObj = {};
     if (i % 2 === 0) {
-      dataObj.q = dataArr[i - 1]
-      dataObj.a = dataArr[i]
-      questions.push(dataObj)
+      dataObj.q = dataArr[i - 1];
+      dataObj.a = dataArr[i];
+      questions.push(dataObj);
     }
   }
-
-
 
   const data = {
     id: formDeckCreate.id.value,
     title: formDeckCreate.title.value,
-    dataArr: questions
-  }
+    dataArr: questions,
+  };
 
-  fetchUniversal('POST', '/editdack', data)
+  fetchUniversal('POST', '/editdack', data);
   formDeckCreate.reset();
   location.href = '/';
-}
+};
 
 async function fetchUniversal(method, path, data) {
   console.log(path);
   let response = {};
   try {
     response = await fetch(path, {
-      method: method,
+      method,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    })
+    });
     const result = await response.json();
     if (response.status === 500) alert(`Ошибка сервера , ${resData.message}`);
-    return result
+    return result;
   } catch (err) { console.log(`This is your mistake ${err.message}`); }
 }
-
-
 
 if (addInputDeck) {
   addInputDeck.addEventListener('click', () => {
@@ -167,29 +162,27 @@ if (addInputDeck) {
       </div>
       <i class="material-icons remove-question">clear</i>
     </div>
-      `
+      `;
     const lengthInputFormDeck = () => {
-      let lengthInputsForm = document.querySelectorAll('.inputs-form-deck').length;
+      const lengthInputsForm = document.querySelectorAll('.inputs-form-deck').length;
       if (lengthInputsForm >= 4) {
         creteDeckSubmit.classList.remove('disabled');
       } else {
         creteDeckSubmit.classList.add('disabled');
       }
-
-    }
+    };
     document.querySelector('.questions-wrapper').insertAdjacentHTML('afterbegin', inputs);
-    lengthInputFormDeck()
+    lengthInputFormDeck();
 
-    let removes = document.querySelectorAll('.remove-question');
-    removes.forEach(el => el.addEventListener('click', (e) => {
+    const removes = document.querySelectorAll('.remove-question');
+    removes.forEach((el) => el.addEventListener('click', (e) => {
       e.target.parentNode.remove();
-      lengthInputFormDeck()
-    }))
+      lengthInputFormDeck();
+    }));
 
     formDeckCreate = document.getElementById('form-deck-create');
     formDeckCreate.removeEventListener('submit', submitFormDeck);
     formDeckCreate.addEventListener('submit', submitFormDeck);
-
   });
 }
 
@@ -207,9 +200,6 @@ if (addInputDeck) {
 //   formDeckCreate.addEventListener('submit', submitFormDeck)
 // }
 
-
-
-
 const session = {
   roundID: '',
   cards: [],
@@ -217,7 +207,7 @@ const session = {
   cardHbs: '',
   rightHbs: '',
   wrongHbs: '',
-  resultHbs: ''
+  resultHbs: '',
 };
 
 const resetSession = () => {
@@ -249,7 +239,7 @@ const fetchPOST = async (url, body) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
     return await response.json();
   } catch (err) {
@@ -257,17 +247,16 @@ const fetchPOST = async (url, body) => {
   }
 };
 
-// Click start button 
+// Click start button
 
 const decksContainer = document.querySelector('.container');
 
 async function levelButton(fileName, deckID) {
-  console.log(deckID)
+  console.log(deckID);
   try {
     const hbsRes = await fetch(`/${fileName}.hbs`);
     const text = await hbsRes.text();
-    return decksContainer.innerHTML = render(text, { deckID: deckID.id })
-
+    return decksContainer.innerHTML = render(text, { deckID: deckID.id });
   } catch (err) {
     console.log(err);
   }
@@ -282,27 +271,24 @@ decksContainer.addEventListener('click', async (event) => {
 
       levelButton('buttonOfLevel', deckID)
         .then(() => {
-          choicePost()
-        })
-
+          choicePost();
+        });
     } catch (err) {
       console.log(err);
     }
   }
-})
+});
 
 let timerOn = true;
 
 function choicePost() {
-
   levelChoice = document.querySelector('.level-choices');
   levelChoice.addEventListener('click', async (e) => {
     if (e.target.classList.contains('level-button')) {
-
       const data = {
         level: e.target.name,
-        id: levelChoice.dataset.deckid
-      }
+        id: levelChoice.dataset.deckid,
+      };
 
       await fetchPOST('/deck', data)
         .then(async (resData) => {
@@ -311,42 +297,35 @@ function choicePost() {
 
           await downloadHbs('cardHbs', 'card');
           decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
-
-
-        })
+        });
 
       // создание и запуск таймера
       const timerDisplay = document.querySelector('div.timer');
       const timer = new Timer(3);
       timer.start(timerDisplay);
-      // если время вышло 
+      // если время вышло
       if (!timer.on) {
         timerOn = false;
       }
     }
-  })
+  });
 }
-
 
 decksContainer.addEventListener('submit', async function (event) {
   event.preventDefault();
 
-  const values = this.querySelectorAll('input')
+  const values = this.querySelectorAll('input');
 
-  let answer = ''
+  let answer = '';
 
-  values.forEach(val => {
+  values.forEach((val) => {
     if (val.checked) {
-      answer = val.value
-      console.log(val.value)
+      answer = val.value;
+      console.log(val.value);
     }
-  })
-
-
+  });
 
   if (event.target.classList.contains('card-form')) {
-
-
     const resData = await fetchPOST('/deck/check', {
       questID: session.cards[session.pointer],
       userAnswer: answer, // []
@@ -354,16 +333,14 @@ decksContainer.addEventListener('submit', async function (event) {
     });
   }
 
-  console.log(session.cards)
-
-
+  console.log(session.cards);
 
   session.pointer += 1;
   if (session.pointer < session.cards.length) {
     decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
   } else {
     await downloadHbs('resultHbs', 'result');
-    const result = await fetchPOST('/deck/finish', { roundID: session.roundID })
+    const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
     result.numQuest = session.cards.length;
     decksContainer.innerHTML = render(session.resultHbs, { result });
   }
@@ -372,4 +349,4 @@ decksContainer.addEventListener('submit', async function (event) {
     resetSession();
     window.location.href = '/';
   }
-})
+});
