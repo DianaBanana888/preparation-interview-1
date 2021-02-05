@@ -10,8 +10,16 @@ const isError = (err, req, res) => {
   console.error(err);
   res.status(500).render('/error');
 };
-const isLocalName = (req, res, next) => {
-  if (req.session.user) res.locals.username = req.session?.user?.name;
+const isLocalName = async (req, res, next) => {
+  if (req.session.user) {
+    res.locals.username = req.session?.user?.name;
+    console.log('Middleware', req.session.user, req.session.user);
+    if (req.session.user.id === (await User.findOne({ email: 'superuser@gmail.com' })).id) {
+      res.locals.nameAdmin = true;
+    } else {
+      res.locals.nameAdmin = false;
+    }
+  }
   next();
 };
 
@@ -61,9 +69,7 @@ const isAlreadyRegistered = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-  if (req.session.user.id === (await User.findOne({ email: 'superuser@gmail.com' })).id) {
-    // res.locals.superuser = req.session?.user?.name;
-    // console.log(res.locals.superuser);
+  if (res.locals.nameAdmin) {
     next();
   } else {
     res.json({ message: 'У вас недостаточно прав, извините' });
