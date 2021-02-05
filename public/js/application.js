@@ -200,8 +200,8 @@ formDeckCreate?.addEventListener('submit', (e) => {
     answerVariant = Array.from(field.querySelectorAll('.answerVariant'), (e) => e.value);
     level = field.querySelector('select').value;
 
-
     arrForData.push({
+      id: null,
       quastion: field.querySelector('.question').value,
       AllAnswer: answerVariant,
       anserTrue: anserTrue,
@@ -219,7 +219,6 @@ formDeckCreate?.addEventListener('submit', (e) => {
   e.preventDefault();
   fetchPOST('/editdack', data);
 });
-
 
 // dinamic form for deck create
 let idBlockQuestion = 0;
@@ -264,12 +263,12 @@ if (addInputDeck) {
       }
     };
     document.querySelector('.questions-wrapper').insertAdjacentHTML('afterbegin', inputs);
-    // lengthInputFormDeck();
+    lengthInputFormDeck();
 
     const removes = document.querySelectorAll('.remove-question');
     removes.forEach((el) => el.addEventListener('click', (e) => {
       e.target.parentNode.remove();
-      // lengthInputFormDeck();
+      lengthInputFormDeck();
     }));
 
     formDeckCreate = document.getElementById('form-deck-create');
@@ -287,8 +286,6 @@ if (addInputDeck) {
         .insertAdjacentHTML('beforeend', setRadioButtonAnswer(indexForRadio, id));
       indexForRadio++;
     });
-    // idBlockQuestion++;
-    // console.log('idBlockQuestion', idBlockQuestion)
   });
 
   function setRadioButtonAnswer(indexForRadio, id) {
@@ -303,24 +300,6 @@ if (addInputDeck) {
     );
   }
 }
-// data = {
-//   id: null,
-//   title: 'title',
-//   dataArr: [
-//     {
-//       q: ' q',
-//       a: ' radio batt  > true answer',
-//       level: '1',
-//       AllAnswer: ['a1', 'a2']
-//     },
-//     {
-//       q: ' q',
-//       a: ' radio batt  > true answer',
-//       level: '1',
-//       AllAnswer: ['a1', 'a2']
-//     }
-//   ]
-// }
 
 const session = {
   roundID: '',
