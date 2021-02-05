@@ -1,12 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/order */
-const db = require('./db');
 const fs = require('fs').promises;
 const Deck = require('./Deck');
 const Card = require('./Card');
 const path = require('path');
+const sessionStore = require('./db');
 
-db.on('open', () => { console.log('Start DB'); }).on('error', console.error.bind(console, 'connection error:'));
+// db.on('open', () => { console.log('Start DB'); })
+// .on('error', console.error.bind(console, 'connection error:'));
 // const fileName = 'html_level3.json';
 const seed = async (file) => {
   const pathFile = path.join(__dirname, `../models/fileseed/${file}`);
@@ -29,4 +30,4 @@ const seed = async (file) => {
     return cardArr;
   });
 };
-seed('css_json.json');
+seed('javascript_json.json');
