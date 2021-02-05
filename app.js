@@ -1,11 +1,12 @@
 const createError = require('http-errors');
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
 const path = require('path');
 const logger = require('morgan');
 const hbs = require('hbs');
 const Deck = require('./models/Deck');
 
+// eslint-disable-next-line no-unused-vars
 const sessionStore = require('./models/db.js');
 
 const app = express();
@@ -25,7 +26,7 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'src', 'views', 'partials'));
 
-/*app.use(
+/* app.use(
   session({
     name: 'sid',
     secret: process.env.SESSION_SECRET,
@@ -37,7 +38,7 @@ hbs.registerPartials(path.join(__dirname, 'src', 'views', 'partials'));
       maxAge: 1000 * 60 * 60 * 24 * 365,
     },
   }),
-);*/
+); */
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 app.use(logger('dev'));
