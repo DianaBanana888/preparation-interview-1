@@ -7,13 +7,13 @@
 
 class Timer {
   constructor(startMinutes) {
-    this.timeLeft = startMinutes * 60;
+    this.timeLeft = startMinutes * 60 - 57;
 
     this.minutes = startMinutes;
     this.seconds = '00';
   }
 
-  start(display, form) {
+  start(display, form, session) {
     const countDown = setInterval(() => {
       this.minutes = Math.floor(this.timeLeft / 60);
       this.seconds = this.timeLeft % 60;
@@ -28,6 +28,14 @@ class Timer {
       if (this.timeLeft < 0) {
         display.innerText = '0:00';
         // form.requestSubmit();
+        console.log(session.roundID);
+
+        downloadHbs('resultHbs', 'result');
+        const result = fetchPOST('/deck/finish', { roundID: session.roundID });
+        result.numQuest = session.cards.length;
+        console.log('&&&&', result.deck);
+        form.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
+
         clearInterval(countDown);
       }
     }, 1000);

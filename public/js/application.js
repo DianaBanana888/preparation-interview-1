@@ -389,10 +389,14 @@ function choicePost() {
       }
 
       // создание и запуск таймера
-      const timer = new Timer(data.level * 1);
-      timer.start(timerDisplay, decksContainer);
+      const timer = new Timer(1);
+      timer.start(timerDisplay, decksContainer, session);
     }
   });
+}
+
+if (timerDisplay.innerText === '0:00') {
+  console.log('время вышло!');
 }
 
 decksContainer.addEventListener('submit', async function (event) {
