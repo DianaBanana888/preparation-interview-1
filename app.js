@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'src', 'views', 'partials'));
 
-app.use(
+/*app.use(
   session({
     name: 'sid',
     secret: process.env.SESSION_SECRET,
@@ -37,7 +37,8 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 365,
     },
   }),
-);
+);*/
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 app.use(logger('dev'));
 app.use(express.json());
