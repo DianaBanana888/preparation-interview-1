@@ -1,5 +1,8 @@
 {
   "main": "server.js",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "npx nodemon server.js --ignore sessions",
