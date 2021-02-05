@@ -11,8 +11,8 @@ const isError = (err, req, res) => {
   res.status(500).render('/error');
 };
 const isLocalName = async (req, res, next) => {
-  if (req.session.user) {
-    res.locals.username = req.session?.user?.name;
+  if (req.session.user && req.session.user.name) {
+    res.locals.username = req.session.user.name;
     if (req.session.user.id === (await User.findOne({ email: 'superuser@gmail.com' })).id) {
       res.locals.nameAdmin = true;
     } else {

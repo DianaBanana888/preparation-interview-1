@@ -110,8 +110,12 @@ function openModalForm(type = null, title = null, name = null) {
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
+    let namet;
+    if (event.target && event.target.login) {
+      namet = event.target.login.value;
+    }
     const data = await fetchUniversal('POST', event.target.action, {
-      name: event?.target?.login?.value,
+      name: namet,
       email: event.target.email.value,
       password: event.target.password.value,
     });
