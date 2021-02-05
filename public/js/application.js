@@ -1,12 +1,6 @@
 /* eslint-disable func-names */
 /* eslint-disable max-len */
 /* eslint-disable no-return-assign */
-/* eslint-disable consistent-return */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-shadow */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-use-before-define */
@@ -147,14 +141,14 @@ function openModalForm(type = null, title = null, name = null) {
     }
   });
 
-  document.querySelector('.password-control').addEventListener('click', () => {
-    const pass = document.querySelector('.pass-auth');
-    if (pass.getAttribute('type') === 'password') {
-      pass.setAttribute('type', 'text');
-    } else {
-      pass.setAttribute('type', 'password');
-    }
-  });
+  // document.querySelector('.password-control').addEventListener('click', () => {
+  //   const pass = document.querySelector('.pass-auth');
+  //   if (pass.getAttribute('type') === 'password') {
+  //     pass.setAttribute('type', 'text');
+  //   } else {
+  //     pass.setAttribute('type', 'password');
+  //   }
+  // });
 
   modal.addEventListener('click', (e) => {
     const target = e.target.classList.contains('modal-form');
@@ -183,10 +177,10 @@ const submitFormDeck = (e) => {
   e.preventDefault();
   const questions = [];
 
-  const colection = new Map();
+  // const colection = new Map();
   const dataArr = Array.from(document.querySelectorAll('.data'), (e) => e.value);
 
-  for (let i = 1; i < dataArr.length; i++) {
+  for (let i = 1; i < dataArr.length; i += 1) {
     const dataObj = {};
     if (i % 2 === 0) {
       dataObj.q = dataArr[i - 1];
@@ -205,23 +199,6 @@ const submitFormDeck = (e) => {
   formDeckCreate.reset();
   window.location.href = '/';
 };
-
-// async function fetchUniversal(method, path, data) {
-//   console.log(path);
-//   let response = {};
-//   try {
-//     response = await fetch(path, {
-//       method,
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     });
-//     const result = await response.json();
-//     if (response.status === 500) alert(`Ошибка сервера , ${resData.message}`);
-//     return result;
-//   } catch (err) { console.log(`This is your mistake ${err.message}`); }
-// }
 
 if (addInputDeck) {
   addInputDeck.addEventListener('click', () => {
@@ -421,6 +398,8 @@ decksContainer.addEventListener('submit', async function (event) {
     });
   }
 
+  console.log(session.cards);
+
   session.pointer += 1;
   if ((session.pointer < session.cards.length) && (timerDisplay.innerText !== '0:00')) {
     decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
@@ -428,7 +407,8 @@ decksContainer.addEventListener('submit', async function (event) {
     await downloadHbs('resultHbs', 'result');
     const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
     result.numQuest = session.cards.length;
-    decksContainer.innerHTML = render(session.resultHbs, { result });
+    console.log('&&&&', result.deck);
+    decksContainer.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
   }
 
   if (event.target.classList.contains('finish')) {
@@ -436,3 +416,13 @@ decksContainer.addEventListener('submit', async function (event) {
     window.location.href = '/';
   }
 });
+
+function wordEnd(n) {
+  // const w_d = ['', 'а', 'ов'];
+  const wd = Math.abs(n) % 100;
+  const wd1 = n % 10;
+  if (wd > 10 && wd < 20) { return 'ов'; }
+  if (wd1 > 1 && wd1 < 5) { return 'а'; }
+  if (wd1 === 1) { return ''; }
+  return 'ов';
+}
