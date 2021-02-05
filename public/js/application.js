@@ -29,7 +29,7 @@ if (topWindow) {
     }
   });
 }
-
+console.log('@@@@@@@@@@');
 async function fetchUniversal(method, path, data) {
   let response = {};
   try {
@@ -114,6 +114,7 @@ function openModalForm(type = null, title = null, name = null) {
     if (event.target && event.target.login) {
       namet = event.target.login.value;
     }
+    console.log('****', namet);
     const data = await fetchUniversal('POST', event.target.action, {
       name: namet,
       email: event.target.email.value,
