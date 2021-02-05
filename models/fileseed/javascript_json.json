@@ -1,0 +1,221 @@
+{
+  "javascript": {
+    "title": "JavaScript",
+    "arr": [
+      {
+        "level": "1",
+        "question": "В какой кодировке XmlHttpRequest отправляется на сервер ?",
+        "answer": "Всегда в UTF - 8",
+        "answerArr": [
+          "В той, какую укажем в заголовке запроса",
+          "Всегда в UTF - 8",
+          "В той, какую захочет получить сервер"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Может ли свойство status объекта XmlHttpRequest быть 1000 ?",
+        "answer": "Всякое бывает",
+        "answerArr": [
+          "Нет,  никогда,  это же HTTP Status!",
+          "Да, но только до вызова send()",
+          "Всякое бывает"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Что надо сделать, чтобы в свойстве responseXml объекта XmlHttpRequest появился XML - документ из ответа сервера ?",
+        "answer": "Прислать валидный XML и поставить на сервере заголовок Content - type : text / xml",
+        "answerArr": [
+          "Прислать валидный XML и поставить на сервере заголовок Content - type : text / xml",
+          "Достаточно прислать валидный XML.",
+          "Некоторые браузеры просто игнорируют это свойство."
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Что нельзя сделать с помощью XmlHttpRequest ?",
+        "answer": "Отправить файл посетителя на сервер без < input type = ”file” >",
+        "answerArr": [
+          "Передать запрос другого типа кроме GET и POST",
+          "Отправить файл посетителя на сервер без <input type=”file”>",
+          "Произвести запрос так, чтобы ответ был готов до следующей строки скрипта",
+          "Сделать запрос с http://yandex.ru на http://google.com"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Что такое AJAX ?",
+        "answer": "Технология для обмена данными с сервером",
+        "answerArr": [
+          "Давно забытый язык программирования",
+          "Технология для обмена данными с сервером",
+          "Новое средство личной гигиены"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "JSON – это сокращение от:",
+        "answer": "JavaScript Object Notation",
+        "answerArr": [
+          "JavaScript Over Network",
+          "Имени создателя javascript",
+          "JavaScript Object Notation"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Какая функция чаще всего применяется к данным в формате JSON ?",
+        "answer": "eval()",
+        "answerArr": [
+          "exec()",
+          "test()",
+          "eval()",
+          "run()"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Какая из этих технологий не используется в AJAX ?",
+        "answer": "Flash",
+        "answerArr": [
+          "XML",
+          "Javascript",
+          "CSS",
+          "Flash"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Объект XMLHttpRequest(или ActiveX-аналог) – это единственный кросс-браузерный способ посылки асинхронных запросов на сервер?",
+        "answer": "Нет",
+        "answerArr": [
+          "Да",
+          "Нет"
+        ]
+      },
+      {
+        "level": "1",
+        "question": "Какой AJAX-транспорт позволит отправить файл на сервер без перезагрузки страницы?",
+        "answer": "Только использование фреймов(IFrame)",
+        "answerArr": [
+          "Только использование фреймов(IFrame)",
+          "XmlHttpRequest справится!",
+          "Мне поможет тэг SCRIPT",
+          "Невозможно ввиду ограничений безопасности javascript"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Что будет выведено alert’ом ?\n <input type=\"text\" id=\"info\">\n <script>\n info = 5\n alert(info)\n</script>",
+        "answer": "Этот код не кросс-браузерный, и может вообще не пахать.",
+        "answerArr": [
+          "Выведет строковое представление для input",
+          "Выведет 5",
+          "Этот код не кросс-браузерный, и может вообще не пахать."
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Что выведет при клике на второй TD из списка ?\n var list = document.getElementsByTagName('TD')\n for (var i=0; i < list.length; i++) {\n list[i].onclick = function() { alert(i) }\n }",
+        "answer": "Зависит от общего количества TD в документе",
+        "answerArr": [
+          "1",
+          "3",
+          "5",
+          "Зависит от общего количества TD в документе"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Есть ли разница между выражениями ?\n(a && b)\n(a && b)",
+        "answer": "Нет",
+        "answerArr": [
+          "Да",
+          "Нет",
+          "В выражении ошибка"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Чему равна переменная day ?\n var day = parseInt(\"08.01.2008\".split('.')[0])",
+        "answer": "0",
+        "answerArr": [
+          "0",
+          "2",
+          "4",
+          "6"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Чему равно свойство input.checked в результате этого кода ?\n var input = document.createElement(\"input\")\n input.type =checkbox input.setAttribute(\"checked\",\"checked\") document.body.appendChild(input)",
+        "answer": "В коде ошибка",
+        "answerArr": [
+          "checked",
+          "true",
+          "false",
+          "В разных браузерах по - разному",
+          "В коде ошибка"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Чему равно a+b+c?\n var a = 1\n var b = { toString:function() {return '1'} }\n var c = Object(1)",
+        "answer": "111",
+        "answerArr": [
+          "11[object Object]",
+          " 2[object Object]",
+          "111",
+          "55"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Чему равна переменная name?var name = \"пупкин\".replace(\"п \",\"д  \")",
+        "answer": "пупкин",
+        "answerArr": [
+          "дудкин",
+          "дупкин",
+          "пупкин",
+          "п",
+          "д"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Какое из этих ключевых слов ООП не используется в javascript (1.5) ?",
+        "answer": "super",
+        "answerArr": [
+          "this",
+          "instanceOf",
+          "super",
+          "new",
+          "Все есть"
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Может ли javascript записать файл на компьютер посетителя ?",
+        "answer": "Может в Firefox или IE, при дополнительных настройках безопасности браузера",
+        "answerArr": [
+          "Нет, ни при каких условиях",
+          "Может в Firefox или IE, при дополнительных настройках безопасности браузера+",
+          "Может в Opera, если javascript запущен локально."
+        ]
+      },
+      {
+        "level": "2",
+        "question": "Чему равен атрибут checked после выполнения данного кода?\n var input = document.createElement(\"input\") input.type = \"checkbox\"input.setAttribute(\"checked\",\"checked\")",
+        "answer": "кроме Internet Explorer",
+        "answerArr": [
+          "true",
+          "false",
+          "checked",
+          "кроме Internet Explorer",
+          "checked всегда"
+        ]
+      }
+    ]
+  }
+}
