@@ -307,11 +307,14 @@ decksContainer.addEventListener('click', async (event) => {
     try {
       const response = await fetch(`/deck/${deckID}`);
       deckID = await response.json();
-
-      levelButton('buttonOfLevel', deckID)
-        .then(() => {
-          choicePost();
-        });
+      if (deckID.message === 'Войдите или зарегистрируйтесь') {
+        openModalForm('login', 'Войти', 'login');
+      } else {
+        levelButton('buttonOfLevel', deckID)
+          .then(() => {
+            choicePost();
+          });
+      }
     } catch (err) {
       console.log(err);
     }
