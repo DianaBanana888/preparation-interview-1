@@ -205,12 +205,14 @@ button.waves-effect.waves-teal.btn-flat.form-button {
 }
 
 i.material-icons.remove-question {
-  font-size: 20px;
+  font-size: 18px !important;
   border-radius: 30px;
   border: 1px solid;
   margin: 0 15px;
   cursor: pointer;
-  padding: 3px;
+  padding: 3px !important;
+  height: max-content;
+  width: max-content;
 }
 .variants {
   display: flex;
@@ -379,6 +381,60 @@ table.striped>tbody>tr:nth-child(odd) {
 table {
   color: #fff;
 }
+/* panel card creat */
+.row.inputs-form-deck {
+  display: flex;
+  flex-direction: column;
+}
+
+.check-group>label {
+  display: flex;
+  align-items: center;
+}
+select.level-add {
+  display: block;
+  background: #ffffff29;
+  border: none;
+  color: #fff;
+}
+
+option {
+  background: #383449;
+  border: none;
+  outline: none;
+  padding: 3px;
+}
+
+input.form-deck--add-answer {
+  width: 100%;
+  padding: 10px 15px;
+  background: #3330;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 auto !important;
+}
+
+.input-field.col.s12.field-add-answer {
+  display: grid;
+  grid-column: 1/5;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.input-field.col.s12.field-question {
+  display: grid;
+  grid-template-columns: 65% 11% 18% 3%;
+  grid-template-rows: 50px auto;
+  gap: 10px;
+  align-items: center;
+}
+.check-group span {
+  transform: translateX(-20px);
+}
+
+
+
+
 
 @media only screen and (max-width: 1200px) {
   .container {
@@ -425,6 +481,7 @@ table {
   .modal-wrapper {
     width: 80%;
   }
+
 }
 
 @media only screen and (max-width: 820px) {

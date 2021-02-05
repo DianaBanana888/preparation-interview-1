@@ -1,3 +1,7 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-const */
+/* eslint-disable object-shorthand */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable func-names */
 /* eslint-disable max-len */
 /* eslint-disable no-return-assign */
@@ -18,6 +22,7 @@ const creteDeckSubmit = document.querySelector('.submit-deck');
 let levelChoice = document.querySelector('.level-choices') || null;
 const authForm = document.querySelector('.modal-content');
 const topWindow = document.querySelector('.top-window') || null;
+let btnAddAnswer = document.querySelector('.form-deck--add-answer') || null;
 
 if (topWindow) {
   // eslint-disable-next-line no-unused-vars
@@ -30,15 +35,15 @@ if (topWindow) {
   });
 }
 
-async function fetchUniversal(method, path, data) {
+async function fetchUniversal(path, data) {
   let response = {};
   try {
-    response = await fetch(path, {
+    response = await fetch('POST', {
       method,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: data,
     });
     console.log('123');
     const result = await response.json();
@@ -104,7 +109,8 @@ function openModalForm(type = null, title = null, name = null) {
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const data = await fetchUniversal('POST', event.target.action, {
+    console.log(event.target.action);
+    const data = await fetchPOST(event.target.action, {
       name: event?.target?.login?.value,
       email: event.target.email.value,
       password: event.target.password.value,
@@ -170,25 +176,83 @@ const submitFormDeck = (e) => {
     dataArr: questions,
   };
 
-  fetchUniversal('POST', '/editdack', data);
-  formDeckCreate.reset();
-  window.location.href = '/';
+  console.log(data);
+
+  // fetchPOST('/editdack', data);
+  // formDeckCreate.reset();
+  // window.location.href = '/';
 };
 
+formDeckCreate?.addEventListener('submit', (e) => {
+  const title = formDeckCreate.title.value;
+  let answerVariant;
+  let anserTrue;
+  let level;
+  let arrForData = [];
+  let data;
+
+  document.querySelectorAll('.field-question').forEach((field) => {
+    document.querySelectorAll('.answer-true').forEach((answer) => {
+      if (answer.checked) {
+        anserTrue = answer.parentNode.querySelector('.answerVariant').value;
+      }
+    });
+    answerVariant = Array.from(field.querySelectorAll('.answerVariant'), (e) => e.value);
+    level = field.querySelector('select').value;
+
+
+    arrForData.push({
+      quastion: field.querySelector('.question').value,
+      AllAnswer: answerVariant,
+      anserTrue: anserTrue,
+      level: level,
+    });
+
+    data = {
+      title: title,
+      dataArr: arrForData,
+    };
+  });
+
+  // console.log(data);
+
+  e.preventDefault();
+  fetchPOST('/editdack', data);
+});
+
+
+// dinamic form for deck create
+let idBlockQuestion = 0;
 if (addInputDeck) {
-  addInputDeck.addEventListener('click', () => {
+  formDeckCreate = document.getElementById('form-deck-create');
+
+  addInputDeck.addEventListener('click', (e) => {
+    e.stopImmediatePropagation();
+    // eslint-disable-next-line no-plusplus
+    idBlockQuestion++;
     const inputs = `
       <div class="row inputs-form-deck">
       <input type="hidden" class="" name="id" value="false" />
-      <div class="input-field col s5">
+
+      <div data-id="${idBlockQuestion}" id="quastion-${idBlockQuestion}" class="input-field col s12 field-question">
+
         <i class="material-icons prefix">live_help</i>
-        <input class="data" required placeholder="Вопрос" name="question"   type="text" >
+        <input class="question" required placeholder="Вопрос" name="question"   type="text" >
+
+          <select class="level-add" name="levelAdd">
+            <option value="" disabled selected>Уровень</option>
+            <option value="1">Уровень 1</option>
+            <option value="2">Уровень 2</option>
+            <option value="3">Уровень 3</option>
+          </select>
+
+        <input type="button" class="form-deck--add-answer" value="Добавить ответ" />
+        <i class="material-icons remove-question">clear</i>
+
+        <div class="input-field col s12 field-add-answer">
       </div>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">chat_bubble</i>
-        <input class="data" required placeholder="Ответ" name="answer" type="text" >
       </div>
-      <i class="material-icons remove-question">clear</i>
+
     </div>
       `;
     const lengthInputFormDeck = () => {
@@ -200,32 +264,62 @@ if (addInputDeck) {
       }
     };
     document.querySelector('.questions-wrapper').insertAdjacentHTML('afterbegin', inputs);
-    lengthInputFormDeck();
+    // lengthInputFormDeck();
 
     const removes = document.querySelectorAll('.remove-question');
     removes.forEach((el) => el.addEventListener('click', (e) => {
       e.target.parentNode.remove();
-      lengthInputFormDeck();
+      // lengthInputFormDeck();
     }));
 
     formDeckCreate = document.getElementById('form-deck-create');
     formDeckCreate.removeEventListener('submit', submitFormDeck);
-    formDeckCreate.addEventListener('submit', submitFormDeck);
+
+    btnAddAnswer = document.querySelector('.form-deck--add-answer');
+    let indexForRadio = 1;
+
+    btnAddAnswer.addEventListener('click', (e) => {
+      e.stopImmediatePropagation();
+
+      let { id } = e.target.parentNode.dataset;
+
+      e.target.parentNode.querySelector('.field-add-answer')
+        .insertAdjacentHTML('beforeend', setRadioButtonAnswer(indexForRadio, id));
+      indexForRadio++;
+    });
+    // idBlockQuestion++;
+    // console.log('idBlockQuestion', idBlockQuestion)
   });
+
+  function setRadioButtonAnswer(indexForRadio, id) {
+    return (
+      `<div class="check-group">
+        <label for="${id}-${indexForRadio}">
+          <input name="answerVariant" type="text" class="filled-in answerVariant" />
+          <input id="${id}-${indexForRadio}" name="trueAnswer-${id}" type="radio" class="filled-in answer-true" />
+          <span></span>
+        </label>
+      </div>`
+    );
+  }
 }
-
-// formDeckCreate.addEventListener('submit', function (e) {
-//   e.preventDefault();
-
-//   const formData = new FormData();
-//   formData.append('questions', formDeckCreate);
-//   console.log(formData)
-
-//   fetchUniversal('POST', '/editdack', formData)
-
-// })
-// function fooDeck() {
-//   formDeckCreate.addEventListener('submit', submitFormDeck)
+// data = {
+//   id: null,
+//   title: 'title',
+//   dataArr: [
+//     {
+//       q: ' q',
+//       a: ' radio batt  > true answer',
+//       level: '1',
+//       AllAnswer: ['a1', 'a2']
+//     },
+//     {
+//       q: ' q',
+//       a: ' radio batt  > true answer',
+//       level: '1',
+//       AllAnswer: ['a1', 'a2']
+//     }
+//   ]
 // }
 
 const session = {
@@ -282,7 +376,6 @@ const fetchPOST = async (url, body) => {
 const decksContainer = document.querySelector('.container');
 
 async function levelButton(fileName, deckID) {
-  console.log(deckID);
   try {
     const hbsRes = await fetch(`/${fileName}.hbs`);
     const text = await hbsRes.text();
@@ -298,6 +391,7 @@ decksContainer.addEventListener('click', async (event) => {
     try {
       const response = await fetch(`/deck/${deckID}`);
       deckID = await response.json();
+      // если ответ faalse модалка на регистрацию
 
       levelButton('buttonOfLevel', deckID)
         .then(() => {
@@ -349,16 +443,7 @@ function choicePost() {
 
 decksContainer.addEventListener('submit', async function (event) {
   event.preventDefault();
-
-  const values = this.querySelectorAll('input');
-
   let answer = '';
-
-  values.forEach((val) => {
-    if (val.checked) {
-      answer = val.value;
-    }
-  });
 
   if (event.target.classList.contains('card-form')) {
     const resData = await fetchPOST('/deck/check', {
@@ -366,24 +451,29 @@ decksContainer.addEventListener('submit', async function (event) {
       userAnswer: answer, // []
       roundID: session.roundID,
     });
-  }
 
-  console.log(session.cards);
+    const values = this.querySelectorAll('input');
 
-  session.pointer += 1;
-  if ((session.pointer < session.cards.length) && (timerDisplay.innerText !== '0:00')) {
-    decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
-  } else {
-    await downloadHbs('resultHbs', 'result');
-    const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
-    result.numQuest = session.cards.length;
-    console.log('&&&&', result.deck);
-    decksContainer.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
-  }
+    values.forEach((val) => {
+      if (val.checked) {
+        answer = val.value;
+      }
+    });
 
-  if (event.target.classList.contains('finish')) {
-    resetSession();
-    window.location.href = '/';
+    session.pointer += 1;
+    if ((session.pointer < session.cards.length) && (timerDisplay.innerText !== '0:00')) {
+      decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
+    } else {
+      await downloadHbs('resultHbs', 'result');
+      const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
+      result.numQuest = session.cards.length;
+      console.log('&&&&', result.deck);
+      decksContainer.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
+    }
+    if (event.target.classList.contains('finish')) {
+      resetSession();
+      window.location.href = '/';
+    }
   }
 });
 
