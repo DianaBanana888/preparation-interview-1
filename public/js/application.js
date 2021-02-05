@@ -386,7 +386,6 @@ decksContainer.addEventListener('submit', async function (event) {
     await downloadHbs('resultHbs', 'result');
     const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
     result.numQuest = session.cards.length;
-    console.log('&&&&', result.deck);
     decksContainer.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 const User = require('../../models/User');
 const Deck = require('../../models/Deck');
@@ -15,24 +16,31 @@ async function deckEdit(req, res) {
   const obj = req.body;
   let idD;
   let cardArr;
-  if (obj.id === '' || obj.id === undefined) {
-    const deck = await Deck.findOne({ title: obj.title, userid: userId }).lean();
-    let title = `${obj.title}`;
-    if (!deck) {
-      title = `${obj.title}*`;
+  let title = `${obj.title.trim()}`;
+  let key = `${title.toLowerCase()}`;
+  if (obj.id === '' || obj.id === undefined || obj.id === null) {
+    const deck = await Deck.findOne({ title }).lean();// , userid: userId
+    if (deck) {
+      // eslint-disable-next-line no-sequences
+      key = `${title.toLowerCase()}*`;
+      title = `${title}*`;
     }
-    idD = await Deck.create({ title, titlerus: obj.title, userid: userId });
+    idD = await Deck.create({
+      key, title, userid: userId,
+    });
   } else {
-    idD = await Deck.findOneAndUpdate({ _id: obj.id, userid: userId },
-      { $set: { title: obj.title, titlerus: obj.title } },
+    idD = await Deck.findOneAndUpdate({ _id: obj.id },
+      { $set: { title } },
       { useFindAndModify: false, new: true }).exec();
-    await Card.deleteMany({ deckid: idD._id });
+    // await Card.deleteMany({ deckid: idD._id });
   }
   if (idD) {
     cardArr = await obj.dataArr.map(async (el) => {
       const cardN = await Card.create({
+        level: el.level,
         question: el.q,
         answer: el.a,
+        answerArr: el.AllAnswer,
         deckid: idD._id,
       });
       return cardN;
