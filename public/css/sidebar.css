@@ -1,7 +1,9 @@
 .sidebar {
+  height: 3em;
+  background-color: #6E6C7B;
   position: absolute;
   right: 10%;
-  top: 20%;
+  top: 10%;
   color: #fff;
 }
 

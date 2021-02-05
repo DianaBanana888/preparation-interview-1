@@ -334,7 +334,9 @@ decksContainer.addEventListener('click', async (event) => {
   }
 });
 
-let timerOn = true;
+const timerDisplay = document.querySelector('.timer');
+const levelDisplay = document.querySelector('.sidebar-level');
+const deckDisplay = document.querySelector('.sidebar-deck');
 
 function choicePost() {
   levelChoice = document.querySelector('.level-choices');
@@ -354,14 +356,18 @@ function choicePost() {
           decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
         });
 
-      // создание и запуск таймера
-      const timerDisplay = document.querySelector('div.timer');
-      const timer = new Timer(3);
-      timer.start(timerDisplay);
-      // если время вышло
-      if (!timer.on) {
-        timerOn = false;
+      // отображение уровня
+      if (data.level === '1') {
+        levelDisplay.innerText = 'Вы решаете легкий уровень';
+      } else if (data.level === '2') {
+        levelDisplay.innerText = 'Вы решаете средний уровень';
+      } else if (data.level === '3') {
+        levelDisplay.innerText = 'Вы решаете высокий уровень';
       }
+
+      // создание и запуск таймера
+      const timer = new Timer(1);
+      timer.start(timerDisplay, decksContainer, session);
     }
   });
 }
@@ -391,7 +397,7 @@ decksContainer.addEventListener('submit', async function (event) {
   console.log(session.cards);
 
   session.pointer += 1;
-  if (session.pointer < session.cards.length) {
+  if ((session.pointer < session.cards.length) && (timerDisplay.innerText !== '0:00')) {
     decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
   } else {
     await downloadHbs('resultHbs', 'result');
