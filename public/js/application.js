@@ -40,13 +40,13 @@ async function fetchUniversal(method, path, data) {
       },
       body: JSON.stringify(data),
     });
-    console.log('123');
     const result = await response.json();
 
-    console.log(result);
     if (response.status === 500) alert(`Ошибка сервера , ${result.message}`);
     return result;
-  } catch (err) { console.log(`This is your mistake: ${err.message}`); }
+  } catch (err) {
+    alert(err.response.data);
+  }
 }
 
 function openModalForm(type = null, title = null, name = null) {
@@ -61,19 +61,22 @@ function openModalForm(type = null, title = null, name = null) {
     <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
       <div class="input-field col s12">
         <i class="material-icons prefix">person_outline</i>
-        <input placeholder="login, minimum 4 symbols" name="login" type="text"  class="autocomplete">
+        <input placeholder="login" name="login" type="text"  class="autocomplete" required>
       </div>
       <div class="input-field col s12">
       <i class="material-icons prefix">person_outline</i>
-      <input placeholder="email, minimum 3 symbols" name="email" id="email" type="email" class="validate">
+      <input placeholder="email" name="email" id="email" type="email" class="validate" required>
       <label for="email"></label>
     </div>
       <div class="input-field col s12">
         <i class="material-icons prefix">https</i>
-        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth">
-        <a class="password-control">Показать пароль</a>
+        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth" required>
+        <a class="password-control">
+        <span class="material-icons eye">visibility</span>
+        </a>
       </div>
 
+      <div class="form-error"></div>
       <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
 
     </form>
@@ -84,15 +87,18 @@ function openModalForm(type = null, title = null, name = null) {
     <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
       <div class="input-field col s12">
         <i class="material-icons prefix">person_outline</i>
-        <input placeholder="email" name="email" id="email" type="email" class="validate">
+        <input placeholder="email" name="email" id="email" type="email" class="validate" required>
         <label for="email"></label>
       </div>
       <div class="input-field col s12">
         <i class="material-icons prefix">https</i>
-        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth">
-        <a class="password-control">Показать пароль</a>
+        <input placeholder="password" name="password" type="password" class="autocomplete pass-auth" required>
+        <a class="password-control">
+        <span class="material-icons eye">visibility</span>
+        </a>
       </div>
 
+      <div class="form-error"></div>
       <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
 
     </form>
@@ -111,24 +117,27 @@ function openModalForm(type = null, title = null, name = null) {
     });
 
     if (data.message !== 'OK') {
-      event.target.insertAdjacentHTML(
-        'beforeend',
-        `<p style="color:red">${data.message}</p>`,
-      );
+      document.querySelector(".form-error").innerHTML = `
+      <p style="color:red">${data.message}</p>
+      `;
+      // event.target.insertAdjacentHTML(
+      //   'beforeend',
+      //   `<p style="color:red">${data.message}</p>`,
+      // );
     } else {
       modal.style.display = 'none';
       window.location.href = '/';
     }
   });
 
-  // document.querySelector('.password-control').addEventListener('click', () => {
-  //   const pass = document.querySelector('.pass-auth');
-  //   if (pass.getAttribute('type') === 'password') {
-  //     pass.setAttribute('type', 'text');
-  //   } else {
-  //     pass.setAttribute('type', 'password');
-  //   }
-  // });
+  document.querySelector('.password-control').addEventListener('click', () => {
+    const pass = document.querySelector('.pass-auth');
+    if (pass.getAttribute('type') === 'password') {
+      pass.setAttribute('type', 'text');
+    } else {
+      pass.setAttribute('type', 'password');
+    }
+  });
 
   modal.addEventListener('click', (e) => {
     const target = e.target.classList.contains('modal-form');
