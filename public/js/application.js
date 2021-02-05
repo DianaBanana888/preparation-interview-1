@@ -22,13 +22,15 @@ const topWindow = document.querySelector('.top-window') || null;
 if (topWindow) {
   // eslint-disable-next-line no-unused-vars
   document.addEventListener('scroll', (e) => {
-    topWindow.style.opacity = 1 - (window.scrollY / 120);
+    const numCss = 1 - (window.scrollY / 100);
+    if (numCss >= -0.5) {
+      topWindow.style.cssText = `
+        opacity: ${numCss}`;
+    }
   });
 }
 
 async function fetchUniversal(method, path, data) {
-  // console.log(path);
-  // console.log(data);
   let response = {};
   try {
     response = await fetch(path, {
@@ -53,28 +55,6 @@ function openModalForm(type = null, title = null, name = null) {
   setTimeout(() => {
     modal.classList.add('open');
   }, 100);
-  // 4 Feb Diana commented to add the improved form of registration
-  // const form = `
-  //   <h3 class="title-form">${title}</h3>
-  //   <form name="${name}" action="/auth/${type}" class="input-field form-auth col s12">
-  //     <div class="input-field col s12">
-  //       <i class="material-icons prefix">person_outline</i>
-  //       <input name="login" type="text"  class="autocomplete">
-  //     </div>
-  //     <div class="input-field col s12">
-  //       <i class="material-icons prefix">https</i>
-  //       <input name="password" type="password" class="autocomplete pass-auth">
-  //       <a class="password-control">Показать пароль</a>
-  //     </div>
-
-  //     <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
-
-  //   </form>
-  // `;
-
-  // Auth modal window
-  // modalContent.insertAdjacentHTML('beforeend', form);
-  // const formFromRegister = document.forms.register;
 
   const formRegister = `
     <h3 class="title-form">${title}</h3>
@@ -167,11 +147,6 @@ navUser.addEventListener('click', (e) => {
     openModalForm('login', 'Войти', 'login');
   }
 });
-
-// creatDeck.addEventListener('click', async (e) => {
-//   e.preventDefault();
-//   await fetchUniversal('GET', '');
-// });
 
 const submitFormDeck = (e) => {
   e.preventDefault();
@@ -382,7 +357,6 @@ decksContainer.addEventListener('submit', async function (event) {
   values.forEach((val) => {
     if (val.checked) {
       answer = val.value;
-      console.log(val.value);
     }
   });
 
