@@ -372,10 +372,6 @@ function choicePost() {
   });
 }
 
-if (timerDisplay.innerText === '0:00') {
-  console.log('время вышло!');
-}
-
 decksContainer.addEventListener('submit', async function (event) {
   event.preventDefault();
 
