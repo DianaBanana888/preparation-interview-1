@@ -1,3 +1,17 @@
+/* eslint-disable func-names */
+/* eslint-disable max-len */
+/* eslint-disable no-return-assign */
+/* eslint-disable consistent-return */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-use-before-define */
+/* eslint-disable quotes */
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 const navUser = document.getElementById('nav-user');
@@ -86,6 +100,7 @@ function openModalForm(type = null, title = null, name = null) {
         </a>
       </div>
 
+      <div class="form-error"></div>
       <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
 
     </form>
@@ -107,6 +122,7 @@ function openModalForm(type = null, title = null, name = null) {
         </a>
       </div>
 
+      <div class="form-error"></div>
       <button type="submit" class="waves-effect answerBtn form-button">${title}</button>
 
     </form>
@@ -115,12 +131,9 @@ function openModalForm(type = null, title = null, name = null) {
   if (name === 'register') modalContent.insertAdjacentHTML('beforeend', formRegister);
   if (name === 'login') modalContent.insertAdjacentHTML('beforeend', formLogin);
 
-  // onchange
-
   authForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
     const data = await fetchUniversal('POST', event.target.action, {
       name: event?.target?.login?.value,
       email: event.target.email.value,
@@ -128,10 +141,13 @@ function openModalForm(type = null, title = null, name = null) {
     });
 
     if (data.message !== 'OK') {
-      event.target.insertAdjacentHTML(
-        'beforeend',
-        `<p style="color:red">${data.message}</p>`,
-      );
+      document.querySelector(".form-error").innerHTML = `
+      <p style="color:red">${data.message}</p>
+      `;
+      // event.target.insertAdjacentHTML(
+      //   'beforeend',
+      //   `<p style="color:red">${data.message}</p>`,
+      // );
     } else {
       modal.style.display = 'none';
       window.location.href = '/';
@@ -174,14 +190,13 @@ const submitFormDeck = (e) => {
   e.preventDefault();
   const questions = [];
 
-  // const colection = new Map();
+  const colection = new Map();
   const dataArr = Array.from(document.querySelectorAll('.data'), (e) => e.value);
 
-  for (let i = 1; i < dataArr.length; i += 1) {
+  for (let i = 1; i < dataArr.length; i++) {
     const dataObj = {};
     if (i % 2 === 0) {
       dataObj.q = dataArr[i - 1];
-
       dataObj.a = dataArr[i];
       questions.push(dataObj);
     }
@@ -197,6 +212,23 @@ const submitFormDeck = (e) => {
   formDeckCreate.reset();
   window.location.href = '/';
 };
+
+// async function fetchUniversal(method, path, data) {
+//   console.log(path);
+//   let response = {};
+//   try {
+//     response = await fetch(path, {
+//       method,
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify(data),
+//     });
+//     const result = await response.json();
+//     if (response.status === 500) alert(`Ошибка сервера , ${resData.message}`);
+//     return result;
+//   } catch (err) { console.log(`This is your mistake ${err.message}`); }
+// }
 
 if (addInputDeck) {
   addInputDeck.addEventListener('click', () => {
@@ -309,33 +341,10 @@ async function levelButton(fileName, deckID) {
   try {
     const hbsRes = await fetch(`/${fileName}.hbs`);
     const text = await hbsRes.text();
-    // eslint-disable-next-line no-return-assign
     return decksContainer.innerHTML = render(text, { deckID: deckID.id });
   } catch (err) {
     console.log(err);
   }
-}
-
-function choicePost() {
-  levelChoice = document.querySelector('.level-choices');
-  levelChoice.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('levelButton')) {
-      const data = {
-        level: e.target.name,
-        id: levelChoice.dataset.deckid,
-      };
-
-      await fetchPOST('/deck', data)
-        .then(async (resData) => {
-          session.roundID = resData.roundID;
-          session.cards = [...resData.cards];
-
-          await downloadHbs('cardHbs', 'card');
-          decksContainer.innerHTML = render(session.cardHbs,
-            { card: session.cards[session.pointer] });
-        });
-    }
-  });
 }
 
 decksContainer.addEventListener('click', async (event) => {
@@ -355,6 +364,38 @@ decksContainer.addEventListener('click', async (event) => {
   }
 });
 
+let timerOn = true;
+
+function choicePost() {
+  levelChoice = document.querySelector('.level-choices');
+  levelChoice.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('level-button')) {
+      const data = {
+        level: e.target.name,
+        id: levelChoice.dataset.deckid,
+      };
+
+      await fetchPOST('/deck', data)
+        .then(async (resData) => {
+          session.roundID = resData.roundID;
+          session.cards = [...resData.cards];
+
+          await downloadHbs('cardHbs', 'card');
+          decksContainer.innerHTML = render(session.cardHbs, { card: session.cards[session.pointer] });
+        });
+
+      // создание и запуск таймера
+      const timerDisplay = document.querySelector('div.timer');
+      const timer = new Timer(3);
+      timer.start(timerDisplay);
+      // если время вышло
+      if (!timer.on) {
+        timerOn = false;
+      }
+    }
+  });
+}
+
 decksContainer.addEventListener('submit', async function (event) {
   event.preventDefault();
 
@@ -370,15 +411,12 @@ decksContainer.addEventListener('submit', async function (event) {
   });
 
   if (event.target.classList.contains('card-form')) {
-    // eslint-disable-next-line no-unused-vars
     const resData = await fetchPOST('/deck/check', {
       questID: session.cards[session.pointer],
       userAnswer: answer, // []
       roundID: session.roundID,
     });
   }
-
-  console.log(session.cards);
 
   session.pointer += 1;
   if (session.pointer < session.cards.length) {

@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable prefer-template */
+/* eslint-disable no-unused-vars */
 // класс для создания объекта таймер
 // при создании экземпляра передаем круглое число минут, минимум одна минута
 // при вызове метода start(display) передаем аргументом элемент на странице
@@ -9,7 +12,7 @@ class Timer {
     this.minutes = startMinutes;
     this.seconds = '00';
 
-    this.on = false;
+    this.on = true;
   }
 
   start(display) {
