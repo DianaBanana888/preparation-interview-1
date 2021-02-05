@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-undef */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-template */
 /* eslint-disable no-unused-vars */
@@ -11,19 +13,10 @@ class Timer {
 
     this.minutes = startMinutes;
     this.seconds = '00';
-
-    this.on = true;
   }
 
-  start(display) {
-    this.on = true;
-
-    const countDown = setInterval(() => {
-      if (this.timeLeft <= 0) {
-        clearInterval(countDown);
-        this.stop();
-      }
-
+  start(display, decksContainer, session) {
+    const countDown = setInterval(async () => {
       this.minutes = Math.floor(this.timeLeft / 60);
       this.seconds = this.timeLeft % 60;
       this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
@@ -31,10 +24,17 @@ class Timer {
 
       // вывод времени
       display.innerText = `${this.minutes}:${this.seconds}`;
-    }, 1000);
-  }
 
-  stop() {
-    this.on = false;
+      if (this.timeLeft < 0) {
+        display.innerText = '0:00';
+
+        downloadHbs('resultHbs', 'result');
+        const result = await fetchPOST('/deck/finish', { roundID: session.roundID });
+        result.numQuest = session.cards.length;
+        decksContainer.innerHTML = render(session.resultHbs, { result, wordend: wordEnd(result.pointer) });
+        resetSession();
+        clearInterval(countDown);
+      }
+    }, 1000);
   }
 }
