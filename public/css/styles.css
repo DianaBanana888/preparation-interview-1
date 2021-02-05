@@ -9,11 +9,13 @@
 body {
   margin: 0;
   background: #383449;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 div#main {
   justify-content: space-between;
   align-items: center;
-  transform: translateY(65px);
+  margin-bottom: 60px;
+  position: relative;
 }
 
 nav {
@@ -23,6 +25,7 @@ nav {
   background: #2f2b3d;
   position: fixed;
   top: 0;
+  z-index: 50;
 }
 nav ul a {
   display: flex;
@@ -37,11 +40,11 @@ a.brand-logo {
 }
 
 .container {
-  padding: 60px 30px;
+  padding: 60px 30px 0 60px;
   margin: 0px auto;
 }
 .row.deck {
-  margin-top: 250px;
+  margin-top: 420px;
   z-index: 10;
   position: relative;
   display: grid;
@@ -50,17 +53,20 @@ a.brand-logo {
 .deck {
   width: 100% !important;
 }
-.back-burtton>a {
+.back-burtton a {
   color: #fff;
   display: flex;
   align-items: center;
   width: max-content;
 }
 .back-burtton {
-  /* display: flex; */
+  display: flex;
   text-align: right;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   width: 100%;
+  top: 100px;
+  position: fixed;
+  left: 0;
 }
 .btn-start {
   border: 2px solid #ffffff;
@@ -145,7 +151,6 @@ button.waves-effect.waves-teal.btn-flat.form-button {
   align-items: center;
   position: fixed;
   flex-direction: column;
-  width: 100%;
 }
 .top-window--title {
   font-size: 60px;
@@ -166,7 +171,7 @@ button.waves-effect.waves-teal.btn-flat.form-button {
   font-weight: 200;
 }
 .top-window--name-block {
-    margin: 50px 0;
+    margin: 20px 0;
 }
 .top-window--title img {
   width: 200px;
@@ -282,15 +287,6 @@ ul.variants li {
 }
 
 
-form.card-form {
-  width: 100%;
-  transform: translateY(-50px);
-}
-
-form.card-form {
-  width: 100%;
-  transform: translateY(-50px);
-}
 
 button.btn.waves-effect.answerBtn {
   height: 60px;
@@ -306,7 +302,7 @@ button.btn.waves-effect.answerBtn {
 }
 form.card-form {
   width: 100%;
-  transform: translateY(-50px);
+  margin-top: 100px;
 }
 
 button.answerBtn {
@@ -384,8 +380,6 @@ table {
   color: #fff;
 }
 
-
-
 @media only screen and (max-width: 1200px) {
   .container {
     width: 90%;
@@ -457,5 +451,3 @@ table {
     margin-bottom: 30px;
   }
 }
-
-
