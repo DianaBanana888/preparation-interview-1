@@ -55,7 +55,7 @@ const isValidPassword = async (req, res, next) => {
 
 const isAuth = async (req, res, next) => {
   if (!req.session.user) {
-    res.render('user/noAuth.hbs');
+    res.json({ message: 'Войдите или зарегистрируйтесь' });
   } else next();
 };
 
