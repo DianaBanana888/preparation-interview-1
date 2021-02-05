@@ -148,14 +148,14 @@ function openModalForm(type = null, title = null, name = null) {
     }
   });
 
-  // document.querySelector('.password-control').addEventListener('click', () => {
-  //   const pass = document.querySelector('.pass-auth');
-  //   if (pass.getAttribute('type') === 'password') {
-  //     pass.setAttribute('type', 'text');
-  //   } else {
-  //     pass.setAttribute('type', 'password');
-  //   }
-  // });
+  document.querySelector('.password-control').addEventListener('click', () => {
+    const pass = document.querySelector('.pass-auth');
+    if (pass.getAttribute('type') === 'password') {
+      pass.setAttribute('type', 'text');
+    } else {
+      pass.setAttribute('type', 'password');
+    }
+  });
 
   modal.addEventListener('click', (e) => {
     const target = e.target.classList.contains('modal-form');
