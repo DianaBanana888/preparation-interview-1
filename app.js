@@ -1,10 +1,12 @@
 const createError = require('http-errors');
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
 const path = require('path');
 const logger = require('morgan');
 const hbs = require('hbs');
+const Deck = require('./models/Deck');
 
+// eslint-disable-next-line no-unused-vars
 const sessionStore = require('./models/db.js');
 
 const app = express();
@@ -12,7 +14,7 @@ const app = express();
 // const indexRoute = require('./src/routes/index');
 const userRoute = require('./src/routes/user');
 // const registerRoute = require('./src/routes/user');
-const indexRoute = require('./src/routes/index');
+// const indexRoute = require('./src/routes/index');
 const createDeckRoute = require('./src/routes/createDeck');
 const authRoute = require('./src/routes/auth');
 const editdackRoute = require('./src/routes/editDack');
@@ -24,7 +26,7 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'src', 'views', 'partials'));
 
-app.use(
+/* app.use(
   session({
     name: 'sid',
     secret: process.env.SESSION_SECRET,
@@ -36,7 +38,8 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 365,
     },
   }),
-);
+); */
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -45,7 +48,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'src', 'views')));
 
 app.use(isLocalName);
-app.use('/', indexRoute);
+app.get('/', async (req, res) => {
+  const decks = await Deck.find().lean();
+  res.render('index.hbs', { decks });
+});
+// app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/createDeck', createDeckRoute);
 app.use('/editdack', editdackRoute);

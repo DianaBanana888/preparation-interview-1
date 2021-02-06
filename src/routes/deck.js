@@ -5,6 +5,7 @@ const Round = require('../../models/Round');
 const User = require('../../models/User');
 const Deck = require('../../models/Deck');
 const Card = require('../../models/Card');
+const { isAuth } = require('../../middleware/auth');
 
 // const app = require('../../app');
 
@@ -15,14 +16,14 @@ const router = express.Router();
 //   res.render('deck/card.hbs', { card });
 // })
 
-router.post('/check', async (req, res) => {
+router.post('/check', isAuth, async (req, res) => {
   const rightAnswer = await Card.findOne({ _id: req.body.questID }).select('answer').lean();
   const result = (req.body.userAnswer.trim() === rightAnswer.answer.trim());
   await Round.updateOne({ _id: req.body.roundID }, { $inc: { tries: 1, points: Number(result) } });
   res.json(result);
 });
 
-router.post('/finish', async (req, res) => {
+router.post('/finish', isAuth, async (req, res) => {
   const arr = ['Легкий уровень', 'Средний уровень', 'Высокий уровень'];
   const round = await Round.findOne({ _id: req.body.roundID }).populate('deck').lean();// .select('tries points -_id')
   res.json({
@@ -30,7 +31,7 @@ router.post('/finish', async (req, res) => {
   });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
   const card = await Card.find({ deckid: req.body.id, level: req.body.level }).select('level question answerArr').lean();
   const cards = card.sort(() => Math.random() - 0.5);
   const deck = await Deck.findOne({ _id: req.body.id });
@@ -45,7 +46,7 @@ router.post('/', async (req, res) => {
   return res.json({ roundID: newRound.id, cards });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', isAuth, async (req, res) => {
   /* const cards = await Card.find({ deckid: req.params.id }).select('question answerArr').lean();
    const deck = await Deck.findOne({ _id: req.params.id });
    let user = {};

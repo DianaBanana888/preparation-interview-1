@@ -6,7 +6,6 @@ const { isAdmin } = require('../../middleware/auth');
 const router = express.Router();
 
 router.get('/', isAdmin, async (req, res) => {
-  console.log('>>>>>>');
   res.render('createDeck.hbs', {});
 });
 

@@ -11,7 +11,7 @@ function formatDate(date) {
   const options = {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
   };
-  return date.toLocaleDateString('ru-RU', options);
+  return `${date.toLocaleDateString('ru-RU', options)} ${(`0${date.getHours()}`).slice(-2)}:${(`0${date.getMinutes()}`).slice(-2)}`;
 }
 
 router.get('/', isAuth, async (req, res) => {
