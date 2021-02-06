@@ -23,6 +23,11 @@ let levelChoice = document.querySelector('.level-choices') || null;
 const authForm = document.querySelector('.modal-content');
 const topWindow = document.querySelector('.top-window') || null;
 let btnAddAnswer = document.querySelector('.form-deck--add-answer') || null;
+const navButtonMobile = document.querySelector('.nav-button-mobile');
+
+navButtonMobile.addEventListener('click', (e) => {
+  document.getElementById('nav-user').classList.toggle('open-menu');
+});
 
 if (topWindow) {
   // eslint-disable-next-line no-unused-vars
