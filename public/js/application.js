@@ -26,7 +26,8 @@ let btnAddAnswer = document.querySelector('.form-deck--add-answer') || null;
 const navButtonMobile = document.querySelector('.nav-button-mobile');
 
 navButtonMobile.addEventListener('click', (e) => {
-  document.getElementById('nav-user').classList.toggle('open-menu');
+  const nav = document.getElementById('nav-user')
+  nav.classList.toggle('open-menu');
 });
 
 if (topWindow) {

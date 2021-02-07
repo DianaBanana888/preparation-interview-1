@@ -3,8 +3,8 @@ const connectMongo = require('connect-mongo');
 const session = require('express-session');
 require('dotenv').config();
 
-// const dbName = 'ClientProject';
-// const dbPath = `mongodb+srv://foxteam1:c1ientProject@cluster0.h3487.mongodb.net/${dbName}`;
+const dbName = 'ClientProject';
+const dbPath = `mongodb+srv://foxteam1:c1ientProject@cluster0.h3487.mongodb.net/${dbName}`;
 const MongoStore = connectMongo(session);
 
 mongoose.connect(process.env.DB_PATH, {

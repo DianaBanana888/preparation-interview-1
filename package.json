@@ -5,13 +5,14 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "npx nodemon server.js --ignore sessions",
+    "dev": "nodemon server.js --ignore sessions",
     "debug": "node --no-lazy --inspect-brk app.js"
   },
   "devDependencies": {
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -24,7 +25,6 @@
     "http-errors": "^1.7.2",
     "mongoose": "^5.11.15",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "registry-auth-token": "^4.2.1",

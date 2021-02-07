@@ -6,12 +6,13 @@ const logger = require('morgan');
 const hbs = require('hbs');
 const Deck = require('./models/Deck');
 
+
 // eslint-disable-next-line no-unused-vars
-const sessionStore = require('./models/db.js');
+const sessionStore = require('./models/db');
 
 const app = express();
 
-// const indexRoute = require('./src/routes/index');
+const indexRoute = require('./src/routes/index');
 const userRoute = require('./src/routes/user');
 // const registerRoute = require('./src/routes/user');
 // const indexRoute = require('./src/routes/index');
@@ -52,7 +53,7 @@ app.get('/', async (req, res) => {
   const decks = await Deck.find().lean();
   res.render('index.hbs', { decks });
 });
-// app.use('/', indexRoute);
+app.use('/', indexRoute);
 app.use('/user', userRoute);
 app.use('/createDeck', createDeckRoute);
 app.use('/editdack', editdackRoute);

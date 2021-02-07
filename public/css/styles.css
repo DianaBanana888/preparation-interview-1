@@ -29,9 +29,9 @@ button.nav-button-mobile {
   height: 40px;
   width: 40px;
   position: absolute;
-  right: 20px;
+  right: 0px;
   top: 9px;
-  cursor: pointer; 
+  cursor: pointer;
   display: none;
 }
 
@@ -53,8 +53,16 @@ ul#nav-user span {
   font-size: 18px;
 }
 a.brand-logo {
-  font-size: 22px;
+
+  font-size: 18px;
   width: max-content;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(
+146deg
+, #8b70f9 33%, #df8ee8 66%, #ce3b3b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 .container {
@@ -62,7 +70,6 @@ a.brand-logo {
   margin: 0px auto;
 }
 .row.deck {
-  margin-top: 420px;
   z-index: 10;
   position: relative;
   display: grid;
@@ -179,7 +186,7 @@ button.waves-effect.waves-teal.btn-flat.form-button {
   padding: 40px 60px 0 0;
   display: flex;
   align-items: center;
-  position: fixed;
+  position: relative;
   flex-direction: column;
 }
 .top-window--title {
@@ -479,9 +486,7 @@ input.form-deck--add-answer {
     line-height: 1.5;
     font-weight: 200;
   }
-  .row.deck {
-    margin-top: 350px;
-  }
+
   .modal-wrapper {
     width: 70%;
   }
@@ -491,8 +496,7 @@ input.form-deck--add-answer {
 @media only screen and (max-width: 992px) {
 
   .row.deck {
-    grid-template-columns: repeat(1, 1fr);
-    margin-top: 350px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .deck {
@@ -511,6 +515,41 @@ input.form-deck--add-answer {
   .modal-wrapper {
     width: 80%;
   }
+
+  button.nav-button-mobile {
+    display: flex;
+    z-index: 11;
+  }
+
+  ul#nav-user {
+    position: absolute;
+    height: 100vh;
+    flex-direction: column;
+    right: -300px;
+    padding: 80px 10px;
+    background: #383449;
+    box-shadow: 0 0 20px #333;
+    top: 0;
+    z-index: 10;
+    width: 50%;
+    align-items: center;
+    display: none;
+    transition: .3s ease-in-out;
+    opacity: 0;
+  }
+  ul#nav-user.open-menu {
+    display: flex !important;
+    animation: nav  .3s ease-in-out;
+    transition: .3s ease-in-out;
+    animation-play-state: running;
+    opacity: 1;
+    right: -30px;
+  }
+
+  @keyframes nav {
+    from {right: -100%;}
+    to {right: -30px;}
+    }
 
 }
 
@@ -534,9 +573,13 @@ input.form-deck--add-answer {
   .top-window--title img {
     width: 120px;
   }
+  .row.deck {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 @media only screen and (max-width: 580px) {
+  
   .top-window {
     flex-direction: column;
     padding: 0;
@@ -544,7 +587,7 @@ input.form-deck--add-answer {
   }
   .top-window--title {
     width: 100%;
-    padding: 0 30px;
+    padding: 0 10px;
     grid-template-columns: 1fr;
   }
   .top-window--name-block {
@@ -554,7 +597,7 @@ input.form-deck--add-answer {
   .name-block--hello {
     border: none;
     font-size: 16px;
-    padding: 15px 30px;
+    padding: 15px 10px;
   }
   .top-window--title img {
     width: 120px;
@@ -562,6 +605,9 @@ input.form-deck--add-answer {
   a.waves-effect.waves-light.btn-small.btn-flat.btn-start.startBtn {
     padding: 5px;
   }
+  .deck {
+    padding: 0 !important;
+}
   p.title {
     font-size: 18px;
     text-align: left;
@@ -585,31 +631,13 @@ input.form-deck--add-answer {
   p.title-card {
     font-size: 20px;
   }
-  button.nav-button-mobile {
-    display: flex;
-    z-index: 11;
-  }
-  ul#nav-user {
-    position: absolute;
-    height: 100vh;
-    flex-direction: column;
-    right: -300px;
-    padding: 80px 10px;
-    background: #383449;
-    box-shadow: 0 0 20px #333;
-    top: 0;
-    z-index: 10;
-    width: 50%;
-    align-items: center;
-    display: none;
-    transition: .3s ease-in-out;
-    opacity: 0;
-  }
-  ul#nav-user.open-menu {
-    display: flex !important;
-    right: -30px !important;
-    transition: .3s ease-in-out;
-    opacity: 1;
-  
+  .brand-logo {
+    left: 0 !important;
+    transform: none !important;
+}
+
+
+  .container {
+    width: 100%;
   }
 }
