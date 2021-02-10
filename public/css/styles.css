@@ -408,7 +408,7 @@ input.level-button {
 }
 
 .level-choices {
-  transform: translateY(-150px);
+  transform: translateY(250px);
 }
 
 table.striped>tbody>tr:nth-child(odd) {
