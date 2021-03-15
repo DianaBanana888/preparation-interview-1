@@ -1,6 +1,6 @@
 # Preparation interview
 
-![web-page-demo] (readme-assets/interview-prep.gif)
+![web-page-demo](readme-assets/interview-prep.gif)
 
 Командный проект от заказчика "Подготовка к собеседованию". Веб-приложение для подготовки к
 техническим тестам и собеседованиям Javascript разработчиков. Express+MongoDB+Handlebars+JS.
